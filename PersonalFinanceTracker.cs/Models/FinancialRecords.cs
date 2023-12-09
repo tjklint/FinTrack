@@ -8,9 +8,12 @@ public class FinancialRecords
 	private string _categoryName;
 	private DateTime _date;
 
-    public FinancialRecords(int id,decimal amount, string categoryName,DateTime date)
-	{
-		
+	
+    public FinancialRecords(decimal amount, string categoryName,DateTime date)
+	{ 
+		Amount = amount;
+		CategoryName = categoryName;
+		Date= date;
 	}
 
 	public int ID
@@ -53,6 +56,18 @@ public class FinancialRecords
 				throw new ArgumentException("Value must be a string.");
 			}
 			_categoryName = value;
+		}
+	}
+
+	public DateTime Date
+	{
+		get
+		{
+			return _date;
+		}
+		set
+		{
+			_date = value;
 		}
 	}
 	

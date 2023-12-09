@@ -40,6 +40,7 @@ public class Finances
 	}
 	public void SetFinancialRecord(FinancialRecords record)
 	{
+		 record.ID = _records.Count + 1;
 		_records.Add(record);
 	}
 	public double Expenses
