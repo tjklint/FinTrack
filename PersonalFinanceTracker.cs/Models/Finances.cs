@@ -105,4 +105,5 @@ public class Finances
 		_records[id].Expense += amount;
 	}
 	
+	
 }

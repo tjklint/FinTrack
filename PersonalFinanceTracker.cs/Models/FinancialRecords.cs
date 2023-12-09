@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.IO;
 
 public class FinancialRecords
 {
@@ -70,5 +71,44 @@ public class FinancialRecords
 			_date = value;
 		}
 	}
-	
+
+    public void AddToFile()
+    {      
+        string filePath = $"Financial_Record_{Date.Month}_{Date.Month}.csv";
+
+		try
+		{
+            if (File.Exists(filePath))
+            {
+				StreamWriter writer=new StreamWriter(filePath);
+				writer.WriteLine(this.ToString());
+				writer.Close();
+            }
+            else
+            {
+				FileStream newfile = File.Create(filePath);
+                StreamWriter writer = new StreamWriter(filePath);
+                writer.WriteLine(this.ToString());
+                writer.Close();
+            }
+        }
+		catch(Exception ex)
+		{
+			Console.WriteLine($"Error:{ex.Message}");
+		}
+		
+		
+    }
+    public override string ToString()
+    {
+		return $@"
+Category Name:{_categoryName}
+
+Category ID:{_id}
+Expenses:{_expense}
+Date:{_date}
+
+";
+    }
+
 }
