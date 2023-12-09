@@ -10,5 +10,34 @@ public class FinancialRecords
 	{
 		
 	}
+
+	public int ID
+	{
+		get
+		{ return _id; }
+		set
+		{
+			if (_id < 0)
+			{
+				throw new ArgumentException("Id cannot be a negative.");
+			}
+			_id = value;
+		}
+	}
+	
+	public decimal Amount
+	{
+		get { return _amount; }
+		set
+		{
+			if (_amount < 0)
+			{
+				throw new ArgumentException("Amount cannot be a negative.");
+			}
+			_amount = value;
+		}
+	}
+
+
 	
 }
