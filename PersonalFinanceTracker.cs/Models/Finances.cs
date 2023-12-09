@@ -12,13 +12,11 @@ public class Finances
 	public Finances()
 	{
 		Balance = 0;
-		Expenses = 0;
 		Income = 0;
 	}
-	public Finances(double balance, double expenses)
+	public Finances(double balance)
 	{
 		Balance=balance;
-		Expenses=expenses;
 	}
 
 	public double Balance
@@ -85,16 +83,24 @@ public class Finances
 		return Balance;
 	}
 
-	public double PayExpense()
+	public double PayExpense(int id,double amount)
 	{
-		if(Balance-Expenses < 0)
+		if ((double)_records[id].Amount - amount < 0)
+		{
+			throw new ArgumentException("Amount exceeds expense.");
+		}
+		if(Balance-amount < 0)
 		{
 
 		}
-		Balance -= Expenses;
-		Expenses -= Balance;
+		Balance -= amount;
+        _records[id].Amount -= (decimal)amount;
 		return Balance;
 	}
-	
+	public double AddExpense(double amount)
+	{
+		Expenses+= amount;
+		return Expenses;
+	}
 	
 }
