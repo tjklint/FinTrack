@@ -38,6 +38,15 @@
                 </StackPanel>
             </GroupBox>
 
+            <!-- Expenses Section -->
+            <GroupBox Header="Expenses" Margin="0,0,0,10">
+                <StackPanel>
+                    <Label>Amount:</Label>
+                    <TextBox ToolTip="Enter expense amount"/>
+                    <Label>Category:</Label>
+
+            </GroupBox>
+
             
         </StackPanel>
 
