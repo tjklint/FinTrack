@@ -77,6 +77,7 @@ public class Finances
 		{
 			throw new ArgumentException("Added income cannot be a negative.");
 		}
+		Income += amount;
 		Balance += amount;
 		return Balance;
 	}
@@ -96,6 +97,7 @@ public class Finances
         _records[id].Expense -= amount;
 		return Balance;
 	}
+
 	public void AddExpense(int id,double amount)
 	{
 		if (amount < 0)
