@@ -4,14 +4,14 @@ using System.CodeDom;
 public class FinancialRecords
 {
 	private int _id;
-	private double _amount;
+	private double _expense;
 	private string _categoryName;
 	private DateTime _date;
 
 	
-    public FinancialRecords(double amount, string categoryName,DateTime date)
+    public FinancialRecords(double expense, string categoryName,DateTime date)
 	{ 
-		Amount = amount;
+		Expense=expense;
 		CategoryName = categoryName;
 		Date= date;
 	}
@@ -30,16 +30,16 @@ public class FinancialRecords
 		}
 	}
 	
-	public double Amount
+	public double Expense
 	{
-		get { return _amount; }
+		get { return _expense; }
 		set
 		{
-			if (_amount < 0)
+			if (_expense < 0)
 			{
 				throw new ArgumentException("Amount cannot be a negative.");
 			}
-			_amount = value;
+			_expense = value;
 		}
 	}
 
