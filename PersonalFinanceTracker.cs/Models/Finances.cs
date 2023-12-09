@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 
 public class Finances
@@ -6,7 +7,8 @@ public class Finances
 	private double _balance;
 	private double _expenses;
 	private double _income;
-
+	private List<FinancialRecords> _records=new List<FinancialRecords>; 
+	
 	public Finances()
 	{
 		Balance = 0;
@@ -68,12 +70,22 @@ public class Finances
 	{
 		if (amount < 0)
 		{
-			throw new ArgumentException("Added income cannot be a negative.")
+			throw new ArgumentException("Added income cannot be a negative.");
 		}
 		Balance += amount;
 		return Balance;
 	}
 
+	public double PayExpense()
+	{
+		if(Balance-Expenses < 0)
+		{
 
+		}
+		Balance -= Expenses;
+		Expenses -= Balance;
+		return Balance;
+	}
+	
 
 }
