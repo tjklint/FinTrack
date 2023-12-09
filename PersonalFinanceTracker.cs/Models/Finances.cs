@@ -7,7 +7,7 @@ public class Finances
 	private double _balance;
 	private double _expenses;
 	private double _income;
-	private List<FinancialRecords> _records=new List<FinancialRecords>; 
+	private List<FinancialRecords> _records=new List<FinancialRecords> { }; 
 	
 	public Finances()
 	{
@@ -34,6 +34,14 @@ public class Finances
 		}
 	}
 
+	public List<FinancialRecords> GetFinancialRecords()
+	{
+		return _records;
+	}
+	public void SetFinancialRecord(FinancialRecords record)
+	{
+		_records.Add(record);
+	}
 	public double Expenses
 	{
 		get
@@ -87,5 +95,5 @@ public class Finances
 		return Balance;
 	}
 	
-
+	
 }
