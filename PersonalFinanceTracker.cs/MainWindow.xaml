@@ -64,6 +64,7 @@
             </StackPanel>
         </StackPanel>
 
-       
+        <!-- Footer Section -->
+        <TextBlock Grid.Row="3" HorizontalAlignment="Center" Margin="10">© 2023 Timothy Klint and Joshua Kravitz</TextBlock>
     </Grid>
 </Window>
