@@ -85,7 +85,7 @@ public class Finances
 
 	public double PayExpense(int id,double amount)
 	{
-		if ((double)_records[id].Amount - amount < 0)
+		if (_records[id].Amount - amount < 0)
 		{
 			throw new ArgumentException("Amount exceeds expense.");
 		}
@@ -94,7 +94,7 @@ public class Finances
 
 		}
 		Balance -= amount;
-        _records[id].Amount -= (decimal)amount;
+        _records[id].Amount -= amount;
 		return Balance;
 	}
 	public double AddExpense(double amount)

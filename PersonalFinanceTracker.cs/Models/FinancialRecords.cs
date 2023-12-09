@@ -4,12 +4,12 @@ using System.CodeDom;
 public class FinancialRecords
 {
 	private int _id;
-	private decimal _amount;
+	private double _amount;
 	private string _categoryName;
 	private DateTime _date;
 
 	
-    public FinancialRecords(decimal amount, string categoryName,DateTime date)
+    public FinancialRecords(double amount, string categoryName,DateTime date)
 	{ 
 		Amount = amount;
 		CategoryName = categoryName;
@@ -30,7 +30,7 @@ public class FinancialRecords
 		}
 	}
 	
-	public decimal Amount
+	public double Amount
 	{
 		get { return _amount; }
 		set
