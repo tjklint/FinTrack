@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceTracker.cs"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Finance Falcon" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="Height">
+    <StackPanel>
+        <TextBlock Text="Finance Falcon" FontSize="25"
+                   FontWeight="Bold" HorizontalAlignment="Center"/>
+    </StackPanel>
 </Window>
