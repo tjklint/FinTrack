@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+
 public class FinancialRecords
 {
 	private int _id;
@@ -38,6 +40,20 @@ public class FinancialRecords
 		}
 	}
 
-
+	public string CategoryName
+	{
+		get
+		{
+			return _categoryName;
+		}
+		set
+		{
+			if (value is not string)
+			{
+				throw new ArgumentException("Value must be a string.");
+			}
+			_categoryName = value;
+		}
+	}
 	
 }
