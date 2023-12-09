@@ -8,6 +8,7 @@ public class FinancialRecords
 	private double _expense;
 	private string _categoryName;
 	private DateTime _date;
+	private double _incomeSpent;
 
 	
     public FinancialRecords(double expense, string categoryName,DateTime date)
@@ -43,8 +44,17 @@ public class FinancialRecords
 			_expense = value;
 		}
 	}
+    public double IncomeSpent
+    {
+        get { return _incomeSpent; }
+        set
+        {
+           
+            _incomeSpent = value;
+        }
+    }
 
-	public string CategoryName
+    public string CategoryName
 	{
 		get
 		{
@@ -74,7 +84,7 @@ public class FinancialRecords
 
     public void AddToFile()
     {      
-        string filePath = $"Financial_Record_{Date.Month}_{Date.Month}.csv";
+        string filePath = $"Financial_Record_{Date.Month}_{Date.Year}.csv";
 
 		try
 		{
@@ -105,6 +115,7 @@ public class FinancialRecords
 Category Name:{_categoryName}
 
 Category ID:{_id}
+Income Spent On Category:{_incomeSpent}
 Expenses:{_expense}
 Date:{_date}
 

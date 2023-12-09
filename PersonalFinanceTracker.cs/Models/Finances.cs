@@ -91,6 +91,7 @@ public class Finances
 		{
 
 		}
+		_records[id].IncomeSpent += amount;
 		Balance -= amount;
         _records[id].Expense -= amount;
 		return Balance;
