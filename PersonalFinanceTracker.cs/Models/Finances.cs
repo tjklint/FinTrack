@@ -12,6 +12,7 @@ public class Finances
 	public Finances()
 	{
 		Balance = 0;
+		Expenses = 0;
 		Income = 0;
 	}
 	public Finances(double balance)
@@ -38,6 +39,7 @@ public class Finances
 	}
 	public void SetFinancialRecord(FinancialRecords record)
 	{
+		Expenses += record.Expense;
 		 record.ID = _records.Count + 1;
 		_records.Add(record);
 	}
@@ -47,12 +49,8 @@ public class Finances
 		{
 			return _expenses;
 		}
-		set
+		private set
 		{
-			if(value<0)
-			{
-				throw new ArgumentException("Expenses cannot be less than 0.");
-			}
 			_expenses = value;
 		}
 	}
@@ -99,9 +97,12 @@ public class Finances
 	}
 	public void AddExpense(int id,double amount)
 	{
+		if (amount < 0)
+		{
+			throw new ArgumentException("Amount cannot be less than 0.");
+		}
+		Expenses += amount;
 		_records[id].Expense += amount;
-
-
 	}
 	
 }
