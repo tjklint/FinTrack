@@ -64,5 +64,16 @@ public class Finances
 		}
 	}
 
+	public double AddIncome(double amount)
+	{
+		if (amount < 0)
+		{
+			throw new ArgumentException("Added income cannot be a negative.")
+		}
+		Balance += amount;
+		return Balance;
+	}
+
+
 
 }
