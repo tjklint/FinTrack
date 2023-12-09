@@ -9,7 +9,14 @@ public class Finances
 
 	public Finances()
 	{
-		
+		Balance = 0;
+		Expenses = 0;
+		Income = 0;
+	}
+	public Finances(double balance, double expenses)
+	{
+		Balance=balance;
+		Expenses=expenses;
 	}
 
 	public double Balance
@@ -24,5 +31,38 @@ public class Finances
 			_balance = value;
 		}
 	}
+
+	public double Expenses
+	{
+		get
+		{
+			return _expenses;
+		}
+		set
+		{
+			if(value<0)
+			{
+				throw new ArgumentException("Expenses cannot be less than 0.");
+			}
+			_expenses = value;
+		}
+	}
+
+	public double Income
+	{
+		get
+		{
+			return _income;
+		}
+		set
+		{
+			if(value<0)
+			{
+				throw new ArgumentException("Income cannot be less than 0.");
+			}
+			_income = value;
+		}
+	}
+
 
 }
