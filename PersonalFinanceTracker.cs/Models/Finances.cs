@@ -110,7 +110,7 @@ public class Finances : INotifyPropertyChanged
 		}
 		if(Balance-amount < 0)
 		{
-
+			// TODO: Add notification to notify users before they go into debt
 		}
 		_records[id].IncomeSpent += amount;
 		Balance -= amount;
