@@ -23,6 +23,14 @@ namespace PersonalFinanceTracker.cs
         public MainWindow()
         {
             InitializeComponent();
+
+            Finances finances = new Finances();
+            this.DataContext = finances;
+        }
+
+        private void tempIncomeAddIncomeClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

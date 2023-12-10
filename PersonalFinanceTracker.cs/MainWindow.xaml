@@ -21,9 +21,9 @@
         <!-- Balance and Expenses Display -->
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="TOTAL BALANCE: " FontSize="16" FontWeight="Bold"/>
-            <TextBlock Text="{Binding TotalBalance}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
+            <TextBlock Text="{Binding Balance}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
-            <TextBlock Text="{Binding TotalExpenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
+            <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
         </StackPanel>
         
         <!-- Main Content Section -->
@@ -34,7 +34,7 @@
                 <StackPanel>
                     <Label>Amount:</Label>
                     <TextBox ToolTip="Enter income amount"/>
-                    <Button Content="Add Income" Margin="0,5,0,0"/>
+                    <Button Content="Add Income" Margin="0,5,0,0" Click="tempIncomeAddIncomeClick"/>
                 </StackPanel>
             </GroupBox>
 

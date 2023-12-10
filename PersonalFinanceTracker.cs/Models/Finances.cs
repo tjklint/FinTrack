@@ -1,15 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
-public class Finances
+public class Finances : INotifyPropertyChanged
 {
 	private double _balance;
 	private double _expenses;
 	private double _income;
-	private List<FinancialRecords> _records=new List<FinancialRecords> { }; 
-	
-	public Finances()
+	private List<FinancialRecords> _records=new List<FinancialRecords> { };
+
+	// Create an event that will update the WPF document with the totals from the class.
+    public event PropertyChangedEventHandler PropertyChanged;
+
+	// The method takes a string parameter of the property that changed. 
+	// If it's null, it will do nothing. If there's something, it will call
+	// Invoke() which triggers the event.
+    void OnPropertyChanged(string propertyName)
+    {
+        // "this" refers to the current instance of the Finances class (though
+        // there will only be one). PropertyChangedEventArgs is a class that
+		// provides data for the PropertyChanged event.
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    public Finances()
 	{
 		Balance = 0;
 		Expenses = 0;
@@ -28,10 +43,11 @@ public class Finances
 		}
 		set
 		{
-			//No need for validation as value can be a negative as they can be in debt.
+			// No need for validation as value can be a negative as they can be in debt.
 			_balance = value;
-		}
-	}
+            OnPropertyChanged(nameof(Balance)); // Notify that balance has been changed.
+        }
+    }
 
 	public List<FinancialRecords> GetFinancialRecords()
 	{
@@ -52,8 +68,9 @@ public class Finances
 		private set
 		{
 			_expenses = value;
-		}
-	}
+            OnPropertyChanged(nameof(Expenses)); // Notify that expenses has been changed.
+        }
+    }
 
 	public double Income
 	{
