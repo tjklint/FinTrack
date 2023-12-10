@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 
+// Implements the INotifyPropertyChanged interface.
+// This interface is used to make changes and provide notifications when the value
+// of a property has changed.
 public class Finances : INotifyPropertyChanged
 {
 	private double _balance;
