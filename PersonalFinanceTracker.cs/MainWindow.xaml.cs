@@ -20,7 +20,7 @@ namespace PersonalFinanceTracker.cs
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Finances finances;
+        private Finances finances; // talk about this in doc
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +35,6 @@ namespace PersonalFinanceTracker.cs
             if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
             {
                 finances.AddIncome(incomeAmount);
-                Console.WriteLine(finances.Income);
             }
         }
     }
