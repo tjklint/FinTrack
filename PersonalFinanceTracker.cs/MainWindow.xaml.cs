@@ -35,6 +35,7 @@ namespace PersonalFinanceTracker.cs
             if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
             {
                 finances.AddIncome(incomeAmount);
+                Console.WriteLine(finances.Income);
             }
         }
     }
