@@ -57,6 +57,8 @@
                         <ComboBoxItem Content="Utilities"/>
                         <ComboBoxItem Content="Rent"/>
                         <!-- Add more -->
+                        <!-- TODO: Add way for user to add/delete a category -->
+                        <!-- TODO: Add month and year choices -->
                     </ComboBox>
                     <Button Content="Add Expense" Margin="0,5,0,0"/>
                 </StackPanel>

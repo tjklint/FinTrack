@@ -20,7 +20,7 @@ namespace PersonalFinanceTracker.cs
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Finances finances; // talk about this in doc
+        private Finances finances; // TODO: talk about this in doc (private)
         public MainWindow()
         {
             InitializeComponent();
@@ -35,7 +35,13 @@ namespace PersonalFinanceTracker.cs
             if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
             {
                 finances.AddIncome(incomeAmount);
+                // ADD THE INCOME TO A TEXT FILE TO KEEP TRACK OF TOTAL.
             }
         }
+
+        // TODO: Add interactivity with expenses.
+        // TODO: Add expenses to files.
+
+        // TODO: ADd interactivity with adding/deleting categories
     }
 }
