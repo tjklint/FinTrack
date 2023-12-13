@@ -20,17 +20,22 @@ namespace PersonalFinanceTracker.cs
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Finances finances;
         public MainWindow()
         {
             InitializeComponent();
-
-            Finances finances = new Finances();
+            
+            finances = new Finances();
             this.DataContext = finances;
+
         }
 
         private void Btn_AddIncome(object sender, RoutedEventArgs e)
         {
-
+            if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
+            {
+                finances.AddIncome(incomeAmount);
+            }
         }
     }
 }

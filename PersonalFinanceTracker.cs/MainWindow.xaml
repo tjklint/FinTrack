@@ -39,7 +39,7 @@
             <GroupBox Header="Income" Margin="0,0,0,10" Grid.Column="0">
                 <StackPanel>
                     <Label>Amount:</Label>
-                    <TextBox ToolTip="Enter income amount"/>
+                    <TextBox x:Name="IncomeAmountTextBox" ToolTip="Enter income amount"/>
                     <Button Content="Add Income" Margin="0,5,0,0" Click="Btn_AddIncome"/>
                 </StackPanel>
             </GroupBox>
