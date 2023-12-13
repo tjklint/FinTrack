@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.IO;
+using System.Windows.Documents;
 
 public class FinancialRecords
 {
@@ -9,7 +10,7 @@ public class FinancialRecords
 	private string _categoryName;
 	private DateTime _date;
 	private double _incomeSpent;
-
+	
 	
     public FinancialRecords(double expense, string categoryName,DateTime date)
 	{ 
