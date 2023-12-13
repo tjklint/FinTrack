@@ -28,7 +28,7 @@ namespace PersonalFinanceTracker.cs
             this.DataContext = finances;
         }
 
-        private void tempIncomeAddIncomeClick(object sender, RoutedEventArgs e)
+        private void Btn_AddIncome(object sender, RoutedEventArgs e)
         {
 
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceTracker.cs"
         mc:Ignorable="d"
-        Title="Finance Falcon" Height="700" Width="500"
+        Title="Finance Falcon" Height="500" Width="500"
         WindowStartupLocation="CenterScreen">
     <Grid Grid.Row="2" Margin="10">
         <Grid.RowDefinitions>
@@ -40,7 +40,7 @@
                 <StackPanel>
                     <Label>Amount:</Label>
                     <TextBox ToolTip="Enter income amount"/>
-                    <Button Content="Add Income" Margin="0,5,0,0" Click="tempIncomeAddIncomeClick"/>
+                    <Button Content="Add Income" Margin="0,5,0,0" Click="Btn_AddIncome"/>
                 </StackPanel>
             </GroupBox>
 
