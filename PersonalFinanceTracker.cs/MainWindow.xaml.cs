@@ -36,7 +36,30 @@ namespace PersonalFinanceTracker.cs
             if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
             {
                 finances.AddIncome(incomeAmount);
-                // ADD THE INCOME TO A TEXT FILE TO KEEP TRACK OF TOTAL.
+
+                string filePath = "income.txt";
+
+                // Check if the file exists
+                if (File.Exists(filePath))
+                {
+                    // Read the existing value from the file
+                    string existingContent = File.ReadAllText(filePath);
+                    if (double.TryParse(existingContent, out double existingIncome))
+                    {
+                        // Add the new income to the existing value and write back to the file
+                        double newTotal = existingIncome + incomeAmount;
+                        File.WriteAllText(filePath, newTotal.ToString());
+                    }
+                    else
+                    {
+                        // TODO: Add error in case there's an issue with IO???
+                    }
+                }
+                else
+                {
+                    // Create the file with the current income amount
+                    File.WriteAllText(filePath, incomeAmount.ToString());
+                }
             }
         }
 
