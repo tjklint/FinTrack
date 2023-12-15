@@ -90,7 +90,7 @@
         </Grid>
 
         <!-- File Operations -->
-        <StackPanel>
+        <StackPanel Grid.Row="3">
             <Button Content="Generate Report" Margin="5"/>
         </StackPanel>
 
