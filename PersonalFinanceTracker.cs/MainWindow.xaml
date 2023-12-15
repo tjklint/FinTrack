@@ -90,7 +90,6 @@
         </Grid>
 
         <!-- File Operations -->
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Content="Generate Report" Margin="5"/>
         </StackPanel>
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,40 @@ namespace PersonalFinanceTracker.cs
                 finances.AddIncome(incomeAmount);
                 // ADD THE INCOME TO A TEXT FILE TO KEEP TRACK OF TOTAL.
             }
+        }
+
+        private void Btn_GenerateReport(object sender, RoutedEventArgs e)
+        {
+            string folderPath = "./piii-course-project-_-_/PersonalFinanceTracker.cs/bin/Debug/net6.0-windows";
+            string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
+            string line;
+            StringBuilder builder=new StringBuilder();
+            for(int i=0; i<csvFiles.Length; i++)
+            {
+                StreamReader reader = new StreamReader(csvFiles[0]);
+                try
+                {
+                    if (File.Exists(csvFiles[i]))
+                    {
+                        while((line=reader.ReadLine()) != null)
+                        {
+                            builder.Append(line);
+                        }
+                    }
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine($"Error:{ex.Message}");
+                }
+                finally
+                {
+                    if(reader != null)
+                    reader.Close();
+                }
+               
+            }
+           
+            MessageBox.Show(builder.ToString());
         }
 
         // TODO: Add interactivity with expenses.
