@@ -57,7 +57,7 @@
                 <StackPanel>
                     <Label>New Expense Category:</Label>
                     <TextBox x:Name="NewCategoryTextBox" ToolTip="Enter new category name"/>
-                    <Button Content="Add Category" Margin="0,5,0,0" Click="Btn_AddCategory"/>
+                    <Button Content="Add Category" Margin="0,5,0,0"/>
                 </StackPanel>
             </GroupBox>
 
