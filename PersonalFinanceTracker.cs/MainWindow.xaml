@@ -111,9 +111,15 @@
         </Grid>
 
         <!-- File Operations -->
-        <StackPanel Grid.Row="3">
-            <Button Content="Generate Report" Margin="5"/>
-        </StackPanel>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Generate Report" Grid.Column="0" Margin="5"/>
+            <Button Content="Pay Expense" Grid.Column="1" Margin="5"/>
+        </Grid>
 
         <!-- Footer Section -->
         <TextBlock Grid.Row="4" HorizontalAlignment="Center" Margin="10">© 2023 Timothy Klint and Joshua Kravitz</TextBlock>
