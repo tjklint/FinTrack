@@ -92,6 +92,16 @@
                             <!-- Pre-populate with months -->
                             <ComboBoxItem Content="January"/>
                             <ComboBoxItem Content="February"/>
+                            <ComboBoxItem Content="March"/>
+                            <ComboBoxItem Content="April"/>
+                            <ComboBoxItem Content="May"/>
+                            <ComboBoxItem Content="June"/>
+                            <ComboBoxItem Content="July"/>
+                            <ComboBoxItem Content="August"/>
+                            <ComboBoxItem Content="September"/>
+                            <ComboBoxItem Content="October"/>
+                            <ComboBoxItem Content="November"/>
+                            <ComboBoxItem Content="December"/>
                             <!-- Add all months -->
                         </ComboBox>
                     </StackPanel>

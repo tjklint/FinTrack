@@ -45,15 +45,15 @@ namespace PersonalFinanceTracker.cs
             string folderPath = "./piii-course-project-_-_/PersonalFinanceTracker.cs/bin/Debug/net6.0-windows";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
-            StringBuilder builder=new StringBuilder();
-            for(int i=0; i<csvFiles.Length; i++)
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < csvFiles.Length; i++)
             {
                 StreamReader reader = new StreamReader(csvFiles[0]);
                 try
                 {
                     if (File.Exists(csvFiles[i]))
                     {
-                        while((line=reader.ReadLine()) != null)
+                        while ((line = reader.ReadLine()) != null)
                         {
                             builder.Append(line);
                         }
@@ -65,17 +65,17 @@ namespace PersonalFinanceTracker.cs
                 }
                 finally
                 {
-                    if(reader != null)
-                    reader.Close();
+                    if (reader != null)
+                        reader.Close();
                 }
-               
+
             }
-           
+
             MessageBox.Show(builder.ToString());
         }
 
         // TODO: Add interactivity with expenses.
-        
+
         // TODO: Add expenses to files.
 
         // TODO: Add interactivity with adding/deleting categories
