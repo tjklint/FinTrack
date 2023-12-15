@@ -34,9 +34,17 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- For Income -->
+                <RowDefinition Height="Auto"/>
+                <!-- For Add Expense Category -->
+                <RowDefinition Height="*"/>
+                <!-- For Expenses -->
+            </Grid.RowDefinitions>
 
             <!-- Income Section -->
-            <GroupBox Header="Income" Margin="0,0,0,10" Grid.Column="0">
+            <GroupBox Header="Income" Grid.Column="0" Grid.Row="0">
                 <StackPanel>
                     <Label>Amount:</Label>
                     <TextBox x:Name="IncomeAmountTextBox" ToolTip="Enter income amount"/>
@@ -44,25 +52,31 @@
                 </StackPanel>
             </GroupBox>
 
+            <!-- Add Expense Category Section -->
+            <GroupBox Header="Expense Category" Grid.Column="0" Grid.Row="1">
+                <StackPanel>
+                    <Label>New Expense Category:</Label>
+                    <TextBox x:Name="NewCategoryTextBox" ToolTip="Enter new category name"/>
+                    <Button Content="Add Category" Margin="0,5,0,0" Click="Btn_AddCategory"/>
+                </StackPanel>
+            </GroupBox>
+
             <!-- Expenses Section -->
-            <GroupBox Header="Expenses" Margin="0,0,0,10" Grid.Column="1">
+            <GroupBox Header="Expenses" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
                 <StackPanel>
                     <Label>Amount:</Label>
                     <TextBox ToolTip="Enter expense amount"/>
                     <Label>Category:</Label>
                     <ComboBox>
-                        
                         <!-- Slightly hardcoded for second -->
                         <ComboBoxItem Content="Groceries"/>
                         <ComboBoxItem Content="Utilities"/>
                         <ComboBoxItem Content="Rent"/>
                         <!-- Add more -->
-                        <!-- TODO: Add way for user to add/delete a category -->
-                        <!-- TODO: Add month and year choices -->
                     </ComboBox>
-                    
+
                     <!-- Date Selection Section -->
-                    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                    <StackPanel Margin="0,10,0,0">
                         <!-- Year Dropdown -->
                         <Label>Year:</Label>
                         <ComboBox x:Name="YearComboBox" SelectedIndex="0" ToolTip="Select year">
@@ -80,13 +94,10 @@
                             <ComboBoxItem Content="February"/>
                             <!-- Add all months -->
                         </ComboBox>
-                    </StackPanel>   
+                    </StackPanel>
                     <Button Content="Add Expense" Margin="0,5,0,0"/>
-                    
                 </StackPanel>
             </GroupBox>
-
-            
         </Grid>
 
         <!-- File Operations -->
