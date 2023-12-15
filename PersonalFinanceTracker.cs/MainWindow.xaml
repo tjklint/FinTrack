@@ -60,7 +60,29 @@
                         <!-- TODO: Add way for user to add/delete a category -->
                         <!-- TODO: Add month and year choices -->
                     </ComboBox>
+                    
+                    <!-- Date Selection Section -->
+    <StackPanel Grid.Column="0" Margin="0,0,10,0">
+        <!-- Year Dropdown -->
+        <Label>Year:</Label>
+        <ComboBox x:Name="YearComboBox" SelectedIndex="0" ToolTip="Select year">
+            <!-- Pre-populate with years, or bind dynamically -->
+            <ComboBoxItem Content="2023"/>
+            <ComboBoxItem Content="2024"/>
+            <!-- Add more years as needed -->
+        </ComboBox>
+
+        <!-- Month Dropdown -->
+        <Label>Month:</Label>
+        <ComboBox x:Name="MonthComboBox" SelectedIndex="0" ToolTip="Select month">
+            <!-- Pre-populate with months -->
+            <ComboBoxItem Content="January"/>
+            <ComboBoxItem Content="February"/>
+            <!-- Add all months -->
+        </ComboBox>
+    </StackPanel>
                     <Button Content="Add Expense" Margin="0,5,0,0"/>
+                    
                 </StackPanel>
             </GroupBox>
 
@@ -69,8 +91,6 @@
 
         <!-- File Operations -->
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Save Data" Margin="5"/>
-            <Button Content="Load Data" Margin="5"/>
             <Button Content="Generate Report" Margin="5"/>
         </StackPanel>
 

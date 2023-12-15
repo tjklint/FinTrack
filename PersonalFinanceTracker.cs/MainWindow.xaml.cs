@@ -24,7 +24,7 @@ namespace PersonalFinanceTracker.cs
         public MainWindow()
         {
             InitializeComponent();
-            
+
             finances = new Finances();
             this.DataContext = finances;
 
@@ -40,8 +40,11 @@ namespace PersonalFinanceTracker.cs
         }
 
         // TODO: Add interactivity with expenses.
+        
         // TODO: Add expenses to files.
 
-        // TODO: ADd interactivity with adding/deleting categories
+        // TODO: Add interactivity with adding/deleting categories
+
+        // TODO: Add ability for users to generate reports using the button.
     }
 }
