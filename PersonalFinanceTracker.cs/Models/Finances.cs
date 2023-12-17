@@ -28,9 +28,18 @@ public class Finances : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
+    #region Constructor
     public Finances()
     {
         // TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
+        InitializeBalance();
+
+
+        Expenses = 0;
+    }
+
+    private void InitializeBalance()
+    {
         string incomeFilePath = "income.txt";
         if (File.Exists(incomeFilePath))
         {
@@ -44,12 +53,9 @@ public class Finances : INotifyPropertyChanged
             _balance = 0;
             File.WriteAllText(incomeFilePath, _balance.ToString());
         }
-        Expenses = 0;
     }
-    public Finances(decimal balance)
-    {
-        Balance = balance;
-    }
+    #endregion
+
 
     public decimal Balance
     {
