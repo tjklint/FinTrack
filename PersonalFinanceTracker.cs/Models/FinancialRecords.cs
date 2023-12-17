@@ -10,6 +10,7 @@ public class FinancialRecords
 	private string _categoryName;
 	private DateTime _date;
 	private decimal _incomeSpent;
+	private decimal _amountPayed;
 	
 	
     public FinancialRecords(decimal expense, string categoryName,DateTime date)
@@ -82,6 +83,19 @@ public class FinancialRecords
 			_date = value;
 		}
 	}
+
+    public decimal AmountPayed
+    {
+        get { return _amountPayed; }
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException("AmountPayed cannot be negative.");
+            }
+            _amountPayed = value;
+        }
+    }
 
     public void AddToFile()
     {      
