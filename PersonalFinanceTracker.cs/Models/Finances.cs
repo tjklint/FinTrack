@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 // Implements the INotifyPropertyChanged interface.
 // This interface is used to make changes and provide notifications when the value
@@ -30,9 +31,20 @@ public class Finances : INotifyPropertyChanged
     public Finances()
 	{
 		// TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
-		Balance = 0;
+		string incomeFilePath = "income.txt";
+        if (File.Exists(incomeFilePath))
+        {
+            // Read the existing balance from the file
+            string balanceStr = File.ReadAllText(incomeFilePath);
+            double.TryParse(balanceStr, out _balance);
+        }
+        else
+        {
+            // File doesn't exist, so create it and initialize balance to 0
+            _balance = 0;
+            File.WriteAllText(incomeFilePath, _balance.ToString());
+        }
 		Expenses = 0;
-		Income = 0;
 	}
 	public Finances(double balance)
 	{
