@@ -29,6 +29,7 @@ public class Finances : INotifyPropertyChanged
 
     public Finances()
 	{
+		// TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
 		Balance = 0;
 		Expenses = 0;
 		Income = 0;
