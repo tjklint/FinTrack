@@ -34,8 +34,8 @@ public class Finances : INotifyPropertyChanged
         // TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
         InitializeBalance();
 
+        IntializeFinancialRecords();
 
-        Expenses = 0;
     }
 
     private void InitializeBalance()
@@ -52,6 +52,37 @@ public class Finances : INotifyPropertyChanged
             // File doesn't exist, so create it and initialize balance to 0
             _balance = 0;
             File.WriteAllText(incomeFilePath, _balance.ToString());
+        }
+    }
+
+    private void IntializeFinancialRecords()
+    {
+        _expenses = 0m;
+
+        string[] csvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*_expenses.csv");
+        foreach (string file in  csvFiles)
+        {
+            string[] lines = File.ReadAllLines(file);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length == 6)
+                {
+                    decimal.TryParse(parts[2], out decimal expense);
+                    decimal.TryParse(parts[5], out decimal amountPayed);
+                    DateTime date;
+                    DateTime.TryParse($"{parts[3]}/{parts[4]}", out date);
+
+                    FinancialRecords record = new FinancialRecords(expense, parts[1], date)
+                    {
+                        ID = int.Parse(parts[0]),
+                        AmountPayed = amountPayed
+                    };
+
+                    _records.Add(record);
+                    _expenses += expense;
+                }
+            }
         }
     }
     #endregion
