@@ -6,13 +6,13 @@ using System.Windows.Documents;
 public class FinancialRecords
 {
 	private int _id;
-	private double _expense;
+	private decimal _expense;
 	private string _categoryName;
 	private DateTime _date;
-	private double _incomeSpent;
+	private decimal _incomeSpent;
 	
 	
-    public FinancialRecords(double expense, string categoryName,DateTime date)
+    public FinancialRecords(decimal expense, string categoryName,DateTime date)
 	{ 
 		Expense=expense;
 		CategoryName = categoryName;
@@ -33,7 +33,7 @@ public class FinancialRecords
 		}
 	}
 	
-	public double Expense
+	public decimal Expense
 	{
 		get { return _expense; }
 		set
@@ -45,7 +45,7 @@ public class FinancialRecords
 			_expense = value;
 		}
 	}
-    public double IncomeSpent
+    public decimal IncomeSpent
     {
         get { return _incomeSpent; }
         set

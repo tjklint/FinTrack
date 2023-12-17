@@ -9,34 +9,34 @@ using System.IO;
 // of a property has changed.
 public class Finances : INotifyPropertyChanged
 {
-	private double _balance;
-	private double _expenses;
-	private double _income;
-	private List<FinancialRecords> _records=new List<FinancialRecords> { };
+    private decimal _balance;
+    private decimal _expenses;
+    private decimal _income;
+    private List<FinancialRecords> _records = new List<FinancialRecords> { };
 
-	// Create an event that will update the WPF document with the totals from the class.
+    // Create an event that will update the WPF document with the totals from the class.
     public event PropertyChangedEventHandler PropertyChanged;
 
-	// The method takes a string parameter of the property that changed. 
-	// If it's null, it will do nothing. If there's something, it will call
-	// Invoke() which triggers the event.
+    // The method takes a string parameter of the property that changed. 
+    // If it's null, it will do nothing. If there's something, it will call
+    // Invoke() which triggers the event.
     void OnPropertyChanged(string propertyName)
     {
         // "this" refers to the current instance of the Finances class (though
         // there will only be one). PropertyChangedEventArgs is a class that
-		// provides data for the PropertyChanged event.
+        // provides data for the PropertyChanged event.
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     public Finances()
-	{
-		// TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
-		string incomeFilePath = "income.txt";
+    {
+        // TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
+        string incomeFilePath = "income.txt";
         if (File.Exists(incomeFilePath))
         {
             // Read the existing balance from the file
             string balanceStr = File.ReadAllText(incomeFilePath);
-            double.TryParse(balanceStr, out _balance);
+            decimal.TryParse(balanceStr, out _balance);
         }
         else
         {
@@ -44,102 +44,103 @@ public class Finances : INotifyPropertyChanged
             _balance = 0;
             File.WriteAllText(incomeFilePath, _balance.ToString());
         }
-		Expenses = 0;
-	}
-	public Finances(double balance)
-	{
-		Balance=balance;
-	}
+        Expenses = 0;
+    }
+    public Finances(decimal balance)
+    {
+        Balance = balance;
+    }
 
-	public double Balance
-	{
-		get
-		{
-			return _balance;
-		}
-		set
-		{
-			// No need for validation as value can be a negative as they can be in debt.
-			_balance = value;
+    public decimal Balance
+    {
+        get
+        {
+            return _balance;
+        }
+        set
+        {
+            // No need for validation as value can be a negative as they can be in debt.
+            _balance = value;
             OnPropertyChanged(nameof(Balance)); // Notify that balance has been changed.
         }
     }
 
-	public List<FinancialRecords> GetFinancialRecords()
-	{
-		return _records;
-	}
-	public void SetFinancialRecord(FinancialRecords record)
-	{
-		Expenses += record.Expense;
-		 record.ID = _records.Count + 1;
-		_records.Add(record);
-	}
-	public double Expenses
-	{
-		get
-		{
-			return _expenses;
-		}
-		private set
-		{
-			_expenses = value;
+    public List<FinancialRecords> GetFinancialRecords()
+    {
+        return _records;
+    }
+    public void SetFinancialRecord(FinancialRecords record)
+    {
+        Expenses += record.Expense;
+        record.ID = _records.Count + 1;
+        _records.Add(record);
+    }
+    public decimal Expenses
+    {
+        get
+        {
+            return _expenses;
+        }
+        private set
+        {
+            _expenses = value;
             OnPropertyChanged(nameof(Expenses)); // Notify that expenses has been changed.
         }
     }
 
-	public double Income
-	{
-		get
-		{
-			return _income;
-		}
-		set
-		{
-			if(value<0)
-			{
-				throw new ArgumentException("Income cannot be less than 0.");
-			}
-			_income = value;
-		}
-	}
+    public decimal Income
+    {
+        get
+        {
+            return _income;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                throw new ArgumentException("Income cannot be less than 0.");
+            }
+            _income = value;
+        }
+    }
 
-	public double AddIncome(double amount)
-	{
-		if (amount < 0)
-		{
-			throw new ArgumentException("Added income cannot be a negative.");
-		}
-		Income += amount;
-		Balance += amount;
-		return Balance;
-	}
+    public decimal AddIncome(decimal amount)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentException("Added income cannot be a negative.");
+        }
+        amount = Math.Round(amount, 2);
+        Income += amount;
+        Balance += amount;
+        return Balance;
+    }
 
-	public double PayExpense(int id,double amount)
-	{
-		if (_records[id].Expense - amount < 0)
-		{
-			throw new ArgumentException("Amount exceeds expense.");
-		}
-		if(Balance-amount < 0)
-		{
-			// TODO: Add notification to notify users before they go into debt
-		}
-		_records[id].IncomeSpent += amount;
-		Balance -= amount;
+    public decimal PayExpense(int id, decimal amount)
+    {
+        if (_records[id].Expense - amount < 0)
+        {
+            throw new ArgumentException("Amount exceeds expense.");
+        }
+        if (Balance - amount < 0)
+        {
+            // TODO: Add notification to notify users before they go into debt
+        }
+        _records[id].IncomeSpent += amount;
+        Balance -= amount;
         _records[id].Expense -= amount;
-		return Balance;
-	}
+        return Balance;
+    }
 
-	public void AddExpense(int id,double amount)
-	{
-		if (amount < 0)
-		{
-			throw new ArgumentException("Amount cannot be less than 0.");
-		}
-		Expenses += amount;
-		_records[id].Expense += amount;
-	}
-	
-	
+    public void AddExpense(int id, decimal amount)
+    {
+        if (amount < 0)
+        {
+            throw new ArgumentException("Amount cannot be less than 0.");
+        }
+        Expenses += amount;
+        _records[id].Expense += amount;
+    }
+
+
 }

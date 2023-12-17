@@ -33,7 +33,7 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_AddIncome(object sender, RoutedEventArgs e)
         {
-            if (double.TryParse(IncomeAmountTextBox.Text, out double incomeAmount))
+            if (decimal.TryParse(IncomeAmountTextBox.Text, out decimal incomeAmount))
             {
                 finances.AddIncome(incomeAmount);
 
@@ -44,10 +44,10 @@ namespace PersonalFinanceTracker.cs
                 {
                     // Read the existing value from the file
                     string existingContent = File.ReadAllText(filePath);
-                    if (double.TryParse(existingContent, out double existingIncome))
+                    if (decimal.TryParse(existingContent, out decimal existingIncome))
                     {
                         // Add the new income to the existing value and write back to the file
-                        double newTotal = existingIncome + incomeAmount;
+                        decimal newTotal = existingIncome + incomeAmount;
                         File.WriteAllText(filePath, newTotal.ToString());
                     }
                     else
