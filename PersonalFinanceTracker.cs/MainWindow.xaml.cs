@@ -169,6 +169,7 @@ namespace PersonalFinanceTracker.cs
                 // Update the ComboBox's ItemsSource
                 CategoryComboBox.ItemsSource = null;
                 CategoryComboBox.ItemsSource = categories;
+
             }
         }
         private void SaveCategory(string category)
