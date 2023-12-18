@@ -106,17 +106,19 @@ namespace PersonalFinanceTracker.cs
                 MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
             {
                 string category = selectedCategoryItem.Content.ToString();
+                string month = selectedMonthItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
-                int month = DateTime.ParseExact(selectedMonthItem.Content.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
-                DateTime date = new DateTime(year, month, 1);
 
-                FinancialRecords record = new FinancialRecords(expenseAmount, category, date);
-                record.ID = finances.GetFinancialRecords().Count; // Will be changed later.
+                // Create FinancialRecord
+                FinancialRecords record = new FinancialRecords(expenseAmount, category, month, year)
+                {
+                    ID = finances.GetFinancialRecords().Count + 1 // Set ID
+                };
                 finances.SetFinancialRecord(record); // Add record to Finances
 
                 string filePath = $"{month}_{year}_expenses.csv";
-                string csvLine = $"{record.ID},{record.CategoryName},{record.Expense},{record.Date.Month},{record.Date.Year},{record.AmountPayed}\n";
-                
+                string csvLine = $"{record.ID},{record.CategoryName},{record.Expense},{record.Month},{record.Year},{record.AmountPayed}\n";
+
                 if (File.Exists(filePath))
                 {
                     File.AppendAllText(filePath, csvLine);

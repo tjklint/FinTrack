@@ -14,11 +14,12 @@ public class FinancialRecords
 	private decimal _amountPayed;
 	
 	
-    public FinancialRecords(decimal expense, string categoryName,DateTime date)
+    public FinancialRecords(decimal expense, string categoryName,string month, int year)
 	{ 
 		Expense=expense;
 		CategoryName = categoryName;
-		Date= date;
+		Month = month;
+		Year = year;
 	}
 
 	public int ID
@@ -94,17 +95,6 @@ public class FinancialRecords
 		}
 	}
 
-	public DateTime Date
-	{
-		get
-		{
-			return _date;
-		}
-		set
-		{
-			_date = value;
-		}
-	}
 
     public decimal AmountPayed
     {
@@ -121,7 +111,7 @@ public class FinancialRecords
 
     public void AddToFile()
     {      
-        string filePath = $"Financial_Record_{Date.Month}_{Date.Year}.csv";
+        string filePath = $"Financial_Record_{Month}_{Year}.csv";
 
 		try
 		{
@@ -154,7 +144,8 @@ Category Name:{_categoryName}
 Category ID:{_id}
 Income Spent On Category:{_incomeSpent}
 Expenses:{_expense}
-Date:{_date}
+Month:{_month}
+Year:{_year}
 
 ";
     }

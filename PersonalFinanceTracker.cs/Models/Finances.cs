@@ -33,7 +33,7 @@ public class Finances : INotifyPropertyChanged
     {
         InitializeBalance();
 
-        IntializeFinancialRecords();
+        InitializeFinancialRecords();
     }
 
     private void InitializeBalance()
@@ -54,25 +54,32 @@ public class Finances : INotifyPropertyChanged
         }
     }
 
-    private void IntializeFinancialRecords()
+    private void InitializeFinancialRecords()
     {
         _expenses = 0m;
 
         string[] csvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*_expenses.csv");
-        foreach (string file in  csvFiles)
+        foreach (string file in csvFiles)
         {
             string[] lines = File.ReadAllLines(file);
+            bool isFirstLine = true; // Flag to skip the header line
+
             foreach (string line in lines)
             {
+                if (isFirstLine)
+                {
+                    isFirstLine = false;
+                    continue; // Skip the header line
+                }
+
                 string[] parts = line.Split(',');
                 if (parts.Length == 6)
                 {
                     decimal.TryParse(parts[2], out decimal expense);
                     decimal.TryParse(parts[5], out decimal amountPayed);
-                    DateTime date;
-                    DateTime.TryParse($"{parts[3]}/{parts[4]}", out date);
+                    int.TryParse(parts[4], out int year);
 
-                    FinancialRecords record = new FinancialRecords(expense, parts[1], date)
+                    FinancialRecords record = new FinancialRecords(expense, parts[1], parts[3], year)
                     {
                         ID = int.Parse(parts[0]),
                         AmountPayed = amountPayed
