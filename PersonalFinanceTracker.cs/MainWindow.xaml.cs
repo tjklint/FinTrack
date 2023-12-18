@@ -23,6 +23,8 @@ namespace PersonalFinanceTracker.cs
     public partial class MainWindow : Window
     {
         private Finances finances; // TODO: talk about this in doc (private)
+        private List<string> categories;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +32,28 @@ namespace PersonalFinanceTracker.cs
             finances = new Finances();
             this.DataContext = finances;
 
+            categories = LoadCategories();
+            CategoryComboBox.ItemsSource = categories;
+
+        }
+
+        private List<string> LoadCategories()
+        {
+            string filePath = "categories.txt";
+            List<string> loadedCategories = new List<string>();
+
+            if (File.Exists(filePath))
+            {
+                loadedCategories = new List<string>(File.ReadAllLines(filePath));
+            }
+            else
+            {
+                // Add default categories if the file doesn't exist
+                loadedCategories.AddRange(new[] { "Create A Category"});
+                File.WriteAllLines(filePath, loadedCategories);
+            }
+
+            return loadedCategories;
         }
 
         private void Btn_AddIncome(object sender, RoutedEventArgs e)
@@ -134,6 +158,24 @@ namespace PersonalFinanceTracker.cs
             }
         }
 
+        private void Btn_AddCategory(object sender, RoutedEventArgs e)
+        {
+            if(!string.IsNullOrWhiteSpace(NewCategoryTextBox.Text) && !categories.Contains(NewCategoryTextBox.Text))
+        {
+                categories.Add(NewCategoryTextBox.Text);
+                SaveCategory(NewCategoryTextBox.Text);
+                NewCategoryTextBox.Clear();
+
+                // Update the ComboBox's ItemsSource
+                CategoryComboBox.ItemsSource = null;
+                CategoryComboBox.ItemsSource = categories;
+            }
+        }
+        private void SaveCategory(string category)
+        {
+            string filePath = "categories.txt";
+            File.AppendAllText(filePath, $"{category}\n");
+        }
         // TODO: Add interactivity with expenses.
 
         // TODO: Add expenses to files.
