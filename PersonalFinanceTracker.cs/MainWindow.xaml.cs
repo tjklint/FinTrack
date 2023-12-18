@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -95,6 +96,24 @@ namespace PersonalFinanceTracker.cs
             }
 
             MessageBox.Show(builder.ToString());
+        }
+
+        private void Btn_AddExpense(object sender, RoutedEventArgs e)
+        {
+            if (decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount) &&
+                CategoryComboBox.SelectedItem is ComboBoxItem selectedCategoryItem &&
+                YearComboBox.SelectedItem is ComboBoxItem selectedYearItem &&
+                MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
+            {
+                string category = selectedCategoryItem.Content.ToString();
+                int year = int.Parse(selectedYearItem.Content.ToString());
+                int month = DateTime.Parse(selectedMonthItem.Content.ToString()).Month;
+                DateTime date = new DateTime(year, month, 1);
+
+                FinancialRecords record = new FinancialRecords(expenseAmount, category, date);
+                record.ID = finances.GetFinancialRecords().Count + 1; // Set ID
+                finances.SetFinancialRecord(record); // Add record to Finances
+            }
         }
 
         // TODO: Add interactivity with expenses.

@@ -31,11 +31,9 @@ public class Finances : INotifyPropertyChanged
     #region Constructor
     public Finances()
     {
-        // TODO: Default constructor needs to compile income and expenses from CSV and TXT files.
         InitializeBalance();
 
         IntializeFinancialRecords();
-
     }
 
     private void InitializeBalance()

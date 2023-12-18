@@ -65,9 +65,9 @@
             <GroupBox Header="Expenses" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
                 <StackPanel>
                     <Label>Amount:</Label>
-                    <TextBox ToolTip="Enter expense amount"/>
+                    <TextBox x:Name="ExpenseAmountTextBox" ToolTip="Enter expense amount"/>
                     <Label>Category:</Label>
-                    <ComboBox>
+                    <ComboBox x:Name="CategoryComboBox">
                         <!-- Slightly hardcoded for second -->
                         <ComboBoxItem Content="Groceries"/>
                         <ComboBoxItem Content="Utilities"/>
@@ -105,7 +105,7 @@
                             <!-- Add all months -->
                         </ComboBox>
                     </StackPanel>
-                    <Button Content="Add Expense" Margin="0,5,0,0"/>
+                    <Button Content="Add Expense" Margin="0,5,0,0" Click="Btn_AddExpense"/>
                 </StackPanel>
             </GroupBox>
         </Grid>
