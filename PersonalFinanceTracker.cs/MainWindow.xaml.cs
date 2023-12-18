@@ -107,12 +107,28 @@ namespace PersonalFinanceTracker.cs
             {
                 string category = selectedCategoryItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
-                int month = DateTime.Parse(selectedMonthItem.Content.ToString()).Month;
+                int month = DateTime.ParseExact(selectedMonthItem.Content.ToString(), "MMMM", CultureInfo.InvariantCulture).Month;
                 DateTime date = new DateTime(year, month, 1);
 
                 FinancialRecords record = new FinancialRecords(expenseAmount, category, date);
-                record.ID = finances.GetFinancialRecords().Count + 1; // Set ID
+                record.ID = finances.GetFinancialRecords().Count; // Will be changed later.
                 finances.SetFinancialRecord(record); // Add record to Finances
+
+                string filePath = $"{month}_{year}_expenses.csv";
+                string csvLine = $"{record.ID},{record.CategoryName},{record.Expense},{record.Date.Month},{record.Date.Year},{record.AmountPayed}\n";
+                
+                if (File.Exists(filePath))
+                {
+                    File.AppendAllText(filePath, csvLine);
+                }
+                else
+                {
+                    File.WriteAllText(filePath, "id,category,amount,month,year,amountpayed\n" + csvLine);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please fill out all expense fields correctly.");
             }
         }
 

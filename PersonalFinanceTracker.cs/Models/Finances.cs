@@ -44,6 +44,7 @@ public class Finances : INotifyPropertyChanged
             // Read the existing balance from the file
             string balanceStr = File.ReadAllText(incomeFilePath);
             decimal.TryParse(balanceStr, out _balance);
+            _balance = Math.Round(_balance, 2);
         }
         else
         {

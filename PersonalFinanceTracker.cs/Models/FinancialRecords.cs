@@ -8,7 +8,8 @@ public class FinancialRecords
 	private int _id;
 	private decimal _expense;
 	private string _categoryName;
-	private DateTime _date;
+	private string _month;
+	private int _year;
 	private decimal _incomeSpent;
 	private decimal _amountPayed;
 	
@@ -46,6 +47,7 @@ public class FinancialRecords
 			_expense = value;
 		}
 	}
+
     public decimal IncomeSpent
     {
         get { return _incomeSpent; }
@@ -53,6 +55,26 @@ public class FinancialRecords
         {
            
             _incomeSpent = value;
+        }
+    }
+
+    public string Month
+    {
+        get { return _month; }
+        set
+        {
+
+            _month = value;
+        }
+    }
+
+    public int Year
+    {
+        get { return _year; }
+        set
+        {
+
+            _year = value;
         }
     }
 
