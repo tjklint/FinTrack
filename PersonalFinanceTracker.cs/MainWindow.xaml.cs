@@ -34,7 +34,7 @@ namespace PersonalFinanceTracker.cs
 
             categories = LoadCategories();
             CategoryComboBox.ItemsSource = categories;
-
+            DeleteCategoryComboBox.ItemsSource = categories;
         }
 
         private List<string> LoadCategories()
@@ -90,20 +90,34 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_GenerateReport(object sender, RoutedEventArgs e)
         {
-            string folderPath = "./piii-course-project-_-_/PersonalFinanceTracker.cs/bin/Debug/net6.0-windows";
+            string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < csvFiles.Length; i++)
             {
-                StreamReader reader = new StreamReader(csvFiles[0]);
+                StreamReader reader = new StreamReader(csvFiles[i]);
                 try
                 {
                     if (File.Exists(csvFiles[i]))
                     {
                         while ((line = reader.ReadLine()) != null)
                         {
-                            builder.Append(line);
+                            string[] data=line.Split(',');
+                            foreach(string info in data)
+                            {
+                                //Checks to see if its the header, the header must be formatted differently.
+                                if (data[0] == "id")
+                                {
+                                    builder.Append( $"{info,-14}");
+                                }
+                                else
+                                {
+                                    builder.Append($"{info,-16}");
+                                }
+                               
+                            }
+                            builder.Append("\n");
                         }
                     }
                 }
@@ -124,12 +138,14 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_AddExpense(object sender, RoutedEventArgs e)
         {
+         
             if (decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount) &&
-                CategoryComboBox.SelectedItem is ComboBoxItem selectedCategoryItem &&
-                YearComboBox.SelectedItem is ComboBoxItem selectedYearItem &&
-                MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
+               CategoryComboBox.SelectedItem is not null &&
+               YearComboBox.SelectedItem is ComboBoxItem selectedYearItem &&
+               MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
             {
-                string category = selectedCategoryItem.Content.ToString();
+                ComboBox selectedCategoryItem=CategoryComboBox;
+                string category = selectedCategoryItem.Text;
                 string month = selectedMonthItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
 
@@ -170,12 +186,59 @@ namespace PersonalFinanceTracker.cs
                 CategoryComboBox.ItemsSource = null;
                 CategoryComboBox.ItemsSource = categories;
 
+                DeleteCategoryComboBox.ItemsSource = null;
+                DeleteCategoryComboBox.ItemsSource = categories;
             }
         }
         private void SaveCategory(string category)
         {
             string filePath = "categories.txt";
             File.AppendAllText(filePath, $"{category}\n");
+        }
+        private void Btn_DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && categories.Contains(DeleteCategoryComboBox.Text))
+            {
+                
+                categories.Remove(DeleteCategoryComboBox.Text);               
+
+                // Update the ComboBox's ItemsSource
+                CategoryComboBox.ItemsSource = null;
+                CategoryComboBox.ItemsSource = categories;
+
+                DeleteCategoryComboBox.ItemsSource = null;
+                DeleteCategoryComboBox.ItemsSource = categories;
+                DeleteCategory();
+
+            }
+            else
+            {
+                MessageBox.Show("Please choose a category to remove.");
+            }
+        }
+        private void DeleteCategory()
+        {
+            string filePath = "./categories.txt";
+            string line;
+            StreamWriter streamWriter=null;
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < categories.Count; i++)
+                    {
+                        builder.Append(categories[i]);
+                    }
+                   // streamWriter = new StreamWriter(filePath,true);
+                    File.WriteAllText(filePath, builder.ToString());
+                }
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Error:{ex.Message}");
+            }
+
         }
         // TODO: Add interactivity with expenses.
 
