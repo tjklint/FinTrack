@@ -186,6 +186,8 @@ namespace PersonalFinanceTracker.cs
                 CategoryComboBox.ItemsSource = null;
                 CategoryComboBox.ItemsSource = categories;
 
+                DeleteCategoryComboBox.ItemsSource = null;
+                DeleteCategoryComboBox.ItemsSource = categories;
             }
         }
         private void SaveCategory(string category)
@@ -197,8 +199,8 @@ namespace PersonalFinanceTracker.cs
         {
             if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && categories.Contains(DeleteCategoryComboBox.Text))
             {
-                categories.Remove(DeleteCategoryComboBox.Text);
-                DeleteCategory(DeleteCategoryComboBox.Text);
+                
+                categories.Remove(DeleteCategoryComboBox.Text);               
 
                 // Update the ComboBox's ItemsSource
                 CategoryComboBox.ItemsSource = null;
@@ -206,6 +208,7 @@ namespace PersonalFinanceTracker.cs
 
                 DeleteCategoryComboBox.ItemsSource = null;
                 DeleteCategoryComboBox.ItemsSource = categories;
+                DeleteCategory();
 
             }
             else
@@ -213,36 +216,29 @@ namespace PersonalFinanceTracker.cs
                 MessageBox.Show("Please choose a category to remove.");
             }
         }
-        private void DeleteCategory(string category)
+        private void DeleteCategory()
         {
             string filePath = "./categories.txt";
             string line;
-            if (File.Exists(filePath))
+            StreamWriter streamWriter=null;
+            try
             {
-                
-                StreamReader reader = new StreamReader(filePath);
-                try
-                {       
-                    while ((line = reader.ReadLine()) != null)
+                if (File.Exists(filePath))
+                {
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < categories.Count; i++)
                     {
-                        if (line == category)
-                        {
-                            string[] blank = {""};
-                            File.WriteAllLines(filePath, blank);
-                        }            
+                        builder.Append(categories[i]);
                     }
-
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine($"Error:{ex.Message}");
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
+                   // streamWriter = new StreamWriter(filePath,true);
+                    File.WriteAllText(filePath, builder.ToString());
                 }
             }
+            catch (IOException ex)
+            {
+                Console.WriteLine($"Error:{ex.Message}");
+            }
+
         }
         // TODO: Add interactivity with expenses.
 
