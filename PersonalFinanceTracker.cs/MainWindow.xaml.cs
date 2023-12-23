@@ -90,7 +90,7 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_GenerateReport(object sender, RoutedEventArgs e)
         {
-            string folderPath = "C:\\Users\\jbkra\\source\\repos\\piii-course-project-_-_\\PersonalFinanceTracker.cs\\bin\\Debug\\net6.0-windows";
+            string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
             StringBuilder builder = new StringBuilder();
