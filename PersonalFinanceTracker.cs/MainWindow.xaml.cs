@@ -90,20 +90,25 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_GenerateReport(object sender, RoutedEventArgs e)
         {
-            string folderPath = "./piii-course-project-_-_/PersonalFinanceTracker.cs/bin/Debug/net6.0-windows";
+            string folderPath = "C:\\Users\\jbkra\\source\\repos\\piii-course-project-_-_\\PersonalFinanceTracker.cs\\bin\\Debug\\net6.0-windows";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < csvFiles.Length; i++)
             {
-                StreamReader reader = new StreamReader(csvFiles[0]);
+                StreamReader reader = new StreamReader(csvFiles[i]);
                 try
                 {
                     if (File.Exists(csvFiles[i]))
                     {
                         while ((line = reader.ReadLine()) != null)
                         {
-                            builder.Append(line);
+                            string[] data=line.Split(',');
+                            foreach(string info in data)
+                            {
+                                builder.Append($"{info}");
+                            }
+                            builder.Append("\n");
                         }
                     }
                 }
@@ -124,12 +129,14 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_AddExpense(object sender, RoutedEventArgs e)
         {
+         
             if (decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount) &&
-                CategoryComboBox.SelectedItem is ComboBoxItem selectedCategoryItem &&
-                YearComboBox.SelectedItem is ComboBoxItem selectedYearItem &&
-                MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
+               CategoryComboBox.SelectedItem is not null &&
+               YearComboBox.SelectedItem is ComboBoxItem selectedYearItem &&
+               MonthComboBox.SelectedItem is ComboBoxItem selectedMonthItem)
             {
-                string category = selectedCategoryItem.Content.ToString();
+                ComboBox selectedCategoryItem=CategoryComboBox;
+                string category = selectedCategoryItem.Text;
                 string month = selectedMonthItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
 
