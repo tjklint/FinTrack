@@ -109,11 +109,11 @@ namespace PersonalFinanceTracker.cs
                                 //Checks to see if its the header, the header must be formatted differently.
                                 if (data[0] == "id")
                                 {
-                                    builder.Append(String.Format("{0,-14}", $"{info}"));
+                                    builder.Append( $"{info,-14}");
                                 }
                                 else
                                 {
-                                    builder.Append(String.Format("{0,-16}", $"{info}"));
+                                    builder.Append($"{info,-16}");
                                 }
                                
                             }
