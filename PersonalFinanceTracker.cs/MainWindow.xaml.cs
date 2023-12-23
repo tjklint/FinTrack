@@ -106,7 +106,16 @@ namespace PersonalFinanceTracker.cs
                             string[] data=line.Split(',');
                             foreach(string info in data)
                             {
-                                builder.Append($"{info}");
+                                //Checks to see if its the header, the header must be formatted differently.
+                                if (data[0] == "id")
+                                {
+                                    builder.Append(String.Format("{0,-16}", $"{info}"));
+                                }
+                                else
+                                {
+                                    builder.Append(String.Format("{0,-18}", $"{info}"));
+                                }
+                               
                             }
                             builder.Append("\n");
                         }
