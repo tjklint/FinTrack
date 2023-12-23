@@ -34,7 +34,7 @@ namespace PersonalFinanceTracker.cs
 
             categories = LoadCategories();
             CategoryComboBox.ItemsSource = categories;
-
+            DeleteCategoryComboBox.ItemsSource = categories;
         }
 
         private List<string> LoadCategories()
@@ -109,11 +109,11 @@ namespace PersonalFinanceTracker.cs
                                 //Checks to see if its the header, the header must be formatted differently.
                                 if (data[0] == "id")
                                 {
-                                    builder.Append(String.Format("{0,-16}", $"{info}"));
+                                    builder.Append(String.Format("{0,-14}", $"{info}"));
                                 }
                                 else
                                 {
-                                    builder.Append(String.Format("{0,-18}", $"{info}"));
+                                    builder.Append(String.Format("{0,-16}", $"{info}"));
                                 }
                                
                             }
@@ -192,6 +192,57 @@ namespace PersonalFinanceTracker.cs
         {
             string filePath = "categories.txt";
             File.AppendAllText(filePath, $"{category}\n");
+        }
+        private void Btn_DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && categories.Contains(DeleteCategoryComboBox.Text))
+            {
+                categories.Remove(DeleteCategoryComboBox.Text);
+                DeleteCategory(DeleteCategoryComboBox.Text);
+
+                // Update the ComboBox's ItemsSource
+                CategoryComboBox.ItemsSource = null;
+                CategoryComboBox.ItemsSource = categories;
+
+                DeleteCategoryComboBox.ItemsSource = null;
+                DeleteCategoryComboBox.ItemsSource = categories;
+
+            }
+            else
+            {
+                MessageBox.Show("Please choose a category to remove.");
+            }
+        }
+        private void DeleteCategory(string category)
+        {
+            string filePath = "./categories.txt";
+            string line;
+            if (File.Exists(filePath))
+            {
+                
+                StreamReader reader = new StreamReader(filePath);
+                try
+                {       
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        if (line == category)
+                        {
+                            string[] blank = {""};
+                            File.WriteAllLines(filePath, blank);
+                        }            
+                    }
+
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine($"Error:{ex.Message}");
+                }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+            }
         }
         // TODO: Add interactivity with expenses.
 
