@@ -241,6 +241,5 @@ namespace PersonalFinanceTracker.cs
             }
 
         }
-        // TODO: Add ability for users to generate reports using the button.
     }
 }
