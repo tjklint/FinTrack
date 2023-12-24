@@ -241,12 +241,6 @@ namespace PersonalFinanceTracker.cs
             }
 
         }
-        // TODO: Add interactivity with expenses.
-
-        // TODO: Add expenses to files.
-
-        // TODO: Add interactivity with adding/deleting categories
-
         // TODO: Add ability for users to generate reports using the button.
     }
 }
