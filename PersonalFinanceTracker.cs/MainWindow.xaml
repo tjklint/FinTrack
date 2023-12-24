@@ -59,14 +59,15 @@
                     <TextBox x:Name="NewCategoryTextBox" ToolTip="Enter new category name"/>
                     <Button Content="Add Category" Margin="0,5,0,0" Click="Btn_AddCategory"/>
                 </StackPanel>
+               
+                <Label>Delete Expense Category:</Label>
+                <ComboBox x:Name="DeleteCategoryComboBox" ToolTip="Delete a category name"/>
+                <Button Content="Delete Category" Margin="0,5,0,0" Click="Btn_DeleteCategory"/>
+               
             </GroupBox>
             
             <GroupBox Header="Expense Category" Grid.Column="0" Grid.Row="3">
-                <StackPanel>
-                    <Label>Delete Expense Category:</Label>
-                    <ComboBox x:Name="DeleteCategoryComboBox" ToolTip="Delete a category name"/>
-                    <Button Content="Delete Category" Margin="0,5,0,0" Click="Btn_DeleteCategory"/>
-                </StackPanel>
+                
             </GroupBox>
 
             <!-- Expenses Section -->
@@ -83,15 +84,14 @@
                         <Label>Year:</Label>
                         <ComboBox x:Name="YearComboBox" SelectedIndex="0" ToolTip="Select year">
                             <!-- Pre-populate with years, or bind dynamically -->
-                            <ComboBoxItem Content="2023"/>
                             <ComboBoxItem Content="2024"/>
+                            <ComboBoxItem Content="2023"/>
                             <!-- Add more years as needed -->
                         </ComboBox>
 
                         <!-- Month Dropdown -->
                         <Label>Month:</Label>
                         <ComboBox x:Name="MonthComboBox" SelectedIndex="0" ToolTip="Select month">
-                            <!-- Pre-populate with months -->
                             <ComboBoxItem Content="January"/>
                             <ComboBoxItem Content="February"/>
                             <ComboBoxItem Content="March"/>
