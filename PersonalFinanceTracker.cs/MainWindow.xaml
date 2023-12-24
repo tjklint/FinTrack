@@ -58,16 +58,12 @@
                     <Label>New Expense Category:</Label>
                     <TextBox x:Name="NewCategoryTextBox" ToolTip="Enter new category name"/>
                     <Button Content="Add Category" Margin="0,5,0,0" Click="Btn_AddCategory"/>
+
+                    <Label>Delete Expense Category:</Label>
+                    <ComboBox x:Name="DeleteCategoryComboBox" ToolTip="Delete a category name"/>
+                    <Button Content="Delete Category" Margin="0,5,0,0" Click="Btn_DeleteCategory"/>
                 </StackPanel>
-               
-                <Label>Delete Expense Category:</Label>
-                <ComboBox x:Name="DeleteCategoryComboBox" ToolTip="Delete a category name"/>
-                <Button Content="Delete Category" Margin="0,5,0,0" Click="Btn_DeleteCategory"/>
-               
-            </GroupBox>
-            
-            <GroupBox Header="Expense Category" Grid.Column="0" Grid.Row="3">
-                
+
             </GroupBox>
 
             <!-- Expenses Section -->

@@ -148,6 +148,7 @@ namespace PersonalFinanceTracker.cs
                 string category = selectedCategoryItem.Text;
                 string month = selectedMonthItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
+                expenseAmount = Math.Round(expenseAmount, 2);
 
                 // Create FinancialRecord
                 FinancialRecords record = new FinancialRecords(expenseAmount, category, month, year)
