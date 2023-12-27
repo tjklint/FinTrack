@@ -61,6 +61,57 @@ namespace PersonalFinanceTracker.cs.Views
         {
 
         }
-        
+        private void ModifyFile(FinancialRecords record,decimal amount)
+        {
+            string folderPath = "./";
+            string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
+            string line;
+            int count = 0; 
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < csvFiles.Length; i++)
+            {
+                StreamReader reader = new StreamReader(csvFiles[i]);
+                try
+                {
+                    if (File.Exists(csvFiles[i]))
+                    {
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            string[] data = line.Split(',');
+                            foreach (string info in data)
+                            {
+                                //Checks to see if its the header, if so skip it.
+                                if (data[0] == "id")
+                                {
+                                  
+                                }
+                                else if (int.Parse(data[0])==record.ID)
+                                {
+                                    string[] lines = File.ReadAllLines(csvFiles[i]);
+                                    data[2] = record.Expense.ToString();
+                                    data[3] = record.AmountPayed.ToString();
+                                    lines[count] = $"{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}";
+                                    File.WriteAllLines(csvFiles[i],lines);
+                                    break;
+                                }
+                                count++;
+
+                            }
+                          
+                        }
+                    }
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine($"Error:{ex.Message}");
+                }
+                finally
+                {
+                    if (reader != null)
+                        reader.Close();
+                }
+
+            }
+        }
     }
 }
