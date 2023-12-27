@@ -24,14 +24,9 @@ public class FinancialRecords
 	}
     public event PropertyChangedEventHandler PropertyChanged;
 
-    // The method takes a string parameter of the property that changed. 
-    // If it's null, it will do nothing. If there's something, it will call
-    // Invoke() which triggers the event.
     void OnPropertyChanged(string propertyName)
     {
-        // "this" refers to the current instance of the Finances class (though
-        // there will only be one). PropertyChangedEventArgs is a class that
-        // provides data for the PropertyChanged event.
+      
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
     public int ID
@@ -79,6 +74,7 @@ public class FinancialRecords
         {
 
             _month = value;
+            OnPropertyChanged(nameof(Month));
         }
     }
 
@@ -89,6 +85,7 @@ public class FinancialRecords
         {
 
             _year = value;
+            OnPropertyChanged(nameof(Year));
         }
     }
 
@@ -120,6 +117,7 @@ public class FinancialRecords
                 throw new ArgumentException("AmountPayed cannot be negative.");
             }
             _amountPayed = value;
+            OnPropertyChanged(nameof(AmountPayed));
         }
     }
 

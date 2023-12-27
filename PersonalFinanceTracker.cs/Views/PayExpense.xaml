@@ -19,11 +19,23 @@
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
                             </Grid.ColumnDefinitions>
                             <Label Content="Name:" FontWeight="Bold"/>
                             <Label Content="{Binding CategoryName}" Grid.Column="1"/>
                             <Label Content="Amount:" FontWeight="Bold" Grid.Column="2"/>
                             <Label Content="{Binding Expense}" Grid.Column="3"/>
+                            <Label Content="Month:" FontWeight="Bold" Grid.Column="4"/>
+                            <Label Content="{Binding Month}" Grid.Column="5"/>
+                            <Label Content="Year:" FontWeight="Bold" Grid.Column="6"/>
+                            <Label Content="{Binding Year}" Grid.Column="7"/>
+                            <Label Content="Amount Payed:" FontWeight="Bold" Grid.Column="8"/>
+                            <Label Content="{Binding AmountPayed}" Grid.Column="9"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
