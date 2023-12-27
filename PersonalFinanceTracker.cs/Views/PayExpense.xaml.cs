@@ -27,6 +27,7 @@ namespace PersonalFinanceTracker.cs.Views
             InitializeComponent();
 
             finances = new Finances();
+            this.DataContext = finances;
             lbExpenses.ItemsSource=finances.GetFinancialRecords();
             lbExpenses.Items.Refresh();
         }
@@ -36,6 +37,7 @@ namespace PersonalFinanceTracker.cs.Views
             if(lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
                 FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;
+                MessageBox.Show(record.ToString());
                 if(expenseAmount < 0)
                 {
                     MessageBox.Show("Expense cannot be less than 0");
@@ -46,7 +48,7 @@ namespace PersonalFinanceTracker.cs.Views
                 }
                 else
                 {
-                    
+                    finances.PayExpense(record.ID, expenseAmount);
                 }
             }
             else
