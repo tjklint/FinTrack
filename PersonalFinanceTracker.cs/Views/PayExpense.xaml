@@ -10,7 +10,7 @@
         <StackPanel>
             <TextBlock Text="Pay Expenses" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
 
-            <ListBox x:Name="lbVisitors" MouseDoubleClick="lbVisitors_MouseDoubleClick" Height="250">
+            <ListBox x:Name="lbExpenses" MouseDoubleClick="lbExpenses_MouseDoubleClick" Height="250">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
