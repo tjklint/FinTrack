@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Documents;
 
@@ -21,8 +22,19 @@ public class FinancialRecords
 		Month = month;
 		Year = year;
 	}
+    public event PropertyChangedEventHandler PropertyChanged;
 
-	public int ID
+    // The method takes a string parameter of the property that changed. 
+    // If it's null, it will do nothing. If there's something, it will call
+    // Invoke() which triggers the event.
+    void OnPropertyChanged(string propertyName)
+    {
+        // "this" refers to the current instance of the Finances class (though
+        // there will only be one). PropertyChangedEventArgs is a class that
+        // provides data for the PropertyChanged event.
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    public int ID
 	{
 		get
 		{ return _id; }
@@ -46,7 +58,8 @@ public class FinancialRecords
 				throw new ArgumentException("Amount cannot be a negative.");
 			}
 			_expense = value;
-		}
+            OnPropertyChanged(nameof(Expense));
+        }
 	}
 
     public decimal IncomeSpent
@@ -92,7 +105,8 @@ public class FinancialRecords
 				throw new ArgumentException("Value must be a string.");
 			}
 			_categoryName = value;
-		}
+            OnPropertyChanged(nameof(CategoryName));
+        }
 	}
 
 

@@ -14,10 +14,16 @@
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
                             <Label Content="Name:" FontWeight="Bold"/>
-                            <Label Content="{Binding Name}" Grid.Column="1"/>
-                            <Label Content="Status:" FontWeight="Bold" Grid.Column="2"/>
-                            <Label Content="{Binding VisitorStatus}" Grid.Column="3"/>
+                            <Label Content="{Binding CategoryName}" Grid.Column="1"/>
+                            <Label Content="Amount:" FontWeight="Bold" Grid.Column="2"/>
+                            <Label Content="{Binding Expense}" Grid.Column="3"/>
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
