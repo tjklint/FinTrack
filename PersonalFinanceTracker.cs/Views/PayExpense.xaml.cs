@@ -36,8 +36,6 @@ namespace PersonalFinanceTracker.cs.Views
         {
             if(lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
-                MessageBox.Show(finances.GetFinancialRecords()[0].ToString());
-                MessageBox.Show(finances.GetFinancialRecords()[1].ToString());
                 FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;             
                     finances.PayExpense(record.ID, expenseAmount);
                     ModifyFile(record,expenseAmount);
@@ -58,7 +56,7 @@ namespace PersonalFinanceTracker.cs.Views
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
             int count = 0; 
-            StringBuilder builder = new StringBuilder();
+
             for (int i = 0; i < csvFiles.Length; i++)
             {
                 StreamReader reader = new StreamReader(csvFiles[i]);
@@ -79,16 +77,17 @@ namespace PersonalFinanceTracker.cs.Views
                                 else if (int.Parse(data[0])==record.ID)
                                 {
                                     string[] lines = File.ReadAllLines(csvFiles[i]);
+                             
                                     data[2] = record.Expense.ToString();
                                     data[3] = record.AmountPayed.ToString();
                                     lines[count] = $"{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}";
                                     File.WriteAllLines(csvFiles[i],lines);
                                     break;
                                 }
-                                count++;
+                                
 
                             }
-                          
+                            count++;
                         }
                     }
                 }
