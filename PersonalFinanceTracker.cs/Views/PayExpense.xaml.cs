@@ -29,7 +29,7 @@ namespace PersonalFinanceTracker.cs.Views
             finances = new Finances();
             this.DataContext = finances;
             lbExpenses.ItemsSource=finances.GetFinancialRecords();
-            lbExpenses.Items.Refresh();
+
         }
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
@@ -39,6 +39,7 @@ namespace PersonalFinanceTracker.cs.Views
                 FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;             
                     finances.PayExpense(record.ID, expenseAmount);
                     ModifyFile(record,expenseAmount);
+                    lbExpenses.Items.Refresh();
             }
             else
             {
@@ -67,8 +68,7 @@ namespace PersonalFinanceTracker.cs.Views
                         while ((line = reader.ReadLine()) != null)
                         {
                             string[] data = line.Split(',');
-                            foreach (string info in data)
-                            {
+                            
                                 //Checks to see if its the header, if so skip it.
                                 if (data[0] == "id")
                                 {
@@ -76,17 +76,13 @@ namespace PersonalFinanceTracker.cs.Views
                                 }
                                 else if (int.Parse(data[0])==record.ID)
                                 {
-                                    string[] lines = File.ReadAllLines(csvFiles[i]);
-                             
+                                    string[] lines = File.ReadAllLines(csvFiles[i]);                           
                                     data[2] = record.Expense.ToString();
                                     data[3] = record.AmountPayed.ToString();
                                     lines[count] = $"{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}";
                                     File.WriteAllLines(csvFiles[i],lines);
-                                    break;
                                 }
-                                
-
-                            }
+                                              
                             count++;
                         }
                     }

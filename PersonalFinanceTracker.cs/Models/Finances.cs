@@ -173,6 +173,7 @@ public class Finances : INotifyPropertyChanged
         }
         _records[id].IncomeSpent += amount;
         Balance -= amount;
+        Expenses -= amount;
         _records[id].Expense -= amount;
         return Balance;
     }
