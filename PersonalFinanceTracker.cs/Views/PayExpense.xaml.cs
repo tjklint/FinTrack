@@ -43,7 +43,6 @@ namespace PersonalFinanceTracker.cs.Views
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string line;
-            int count = 0;
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < csvFiles.Length; i++)
             {
@@ -64,10 +63,9 @@ namespace PersonalFinanceTracker.cs.Views
                                 else
                                 {
                                     FinancialRecords record = new FinancialRecords(decimal.Parse(data[2]), data[1], data[3], int.Parse(data[4]));
-                                    financialRecords[count] = record;
+                                    financialRecords.Add(record);
                                 }
 
-                            count++;
                         }
                     }
                 }

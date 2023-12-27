@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalFinanceTracker.cs.Views;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -242,9 +243,12 @@ namespace PersonalFinanceTracker.cs
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
+            PayExpense payExpense = new PayExpense();
+            payExpense.Show();
 
+            this.Close();
         }
     }
 }
