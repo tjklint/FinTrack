@@ -20,7 +20,7 @@ namespace PersonalFinanceTracker.cs.Views
     /// </summary>
     public partial class PayExpense : Window
     {
-        List<FinancialRecords> financialRecords;
+        List<FinancialRecords> financialRecords=new List<FinancialRecords>();
         public PayExpense()
         {
             InitializeComponent();
