@@ -21,66 +21,44 @@ namespace PersonalFinanceTracker.cs.Views
     public partial class PayExpense : Window
     {
         List<FinancialRecords> financialRecords=new List<FinancialRecords>();
+        private Finances finances;
         public PayExpense()
         {
             InitializeComponent();
-            InitializeExpenses();
-            lbExpenses.ItemsSource=financialRecords;
+
+            finances = new Finances();
+            lbExpenses.ItemsSource=finances.GetFinancialRecords();
             lbExpenses.Items.Refresh();
         }
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
-
+            if(lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
+            {
+                FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;
+                if(expenseAmount < 0)
+                {
+                    MessageBox.Show("Expense cannot be less than 0");
+                }
+                else if(expenseAmount>record.Expense)
+                {
+                    MessageBox.Show("Current amount exceeds amount to pay off.");
+                }
+                else
+                {
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an expense.");
+            }
         }
 
         private void lbExpenses_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
         }
-        private void InitializeExpenses() 
-        {
-            string folderPath = "./";
-            string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
-            string line;
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < csvFiles.Length; i++)
-            {
-                StreamReader reader = new StreamReader(csvFiles[i]);
-                try
-                {
-                    if (File.Exists(csvFiles[i]))
-                    {
-                        while ((line = reader.ReadLine()) != null)
-                        {
-                            string[] data = line.Split(',');
-                            
-                                //Checks to see if its the header, if so skip it.
-                                if (data[0] == "id")
-                                {
-                                 
-                                }
-                                else
-                                {
-                                    FinancialRecords record = new FinancialRecords(decimal.Parse(data[2]), data[1], data[3], int.Parse(data[4]));
-                                    financialRecords.Add(record);
-                                }
-
-                        }
-                    }
-                }
-                catch (IOException ex)
-                {
-                    Console.WriteLine($"Error:{ex.Message}");
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
-            }
-
-        }
+        
     }
 }
