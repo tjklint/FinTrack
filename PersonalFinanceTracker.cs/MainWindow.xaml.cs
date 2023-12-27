@@ -25,7 +25,7 @@ namespace PersonalFinanceTracker.cs
     {
         private Finances finances; // TODO: talk about this in doc (private)
         private List<string> categories;
-
+       
         public MainWindow()
         {
             InitializeComponent();

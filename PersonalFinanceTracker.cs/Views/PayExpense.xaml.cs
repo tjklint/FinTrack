@@ -36,20 +36,11 @@ namespace PersonalFinanceTracker.cs.Views
         {
             if(lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
-                FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;
-                MessageBox.Show(record.ToString());
-                if(expenseAmount < 0)
-                {
-                    MessageBox.Show("Expense cannot be less than 0");
-                }
-                else if(expenseAmount>record.Expense)
-                {
-                    MessageBox.Show("Current amount exceeds amount to pay off.");
-                }
-                else
-                {
+                MessageBox.Show(finances.GetFinancialRecords()[0].ToString());
+                MessageBox.Show(finances.GetFinancialRecords()[1].ToString());
+                FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;             
                     finances.PayExpense(record.ID, expenseAmount);
-                }
+                    ModifyFile(record,expenseAmount);
             }
             else
             {

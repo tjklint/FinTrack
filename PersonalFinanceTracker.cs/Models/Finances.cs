@@ -12,6 +12,7 @@ public class Finances : INotifyPropertyChanged
     private decimal _balance;
     private decimal _expenses;
     private decimal _income;
+    private int recordCount;
     private List<FinancialRecords> _records = new List<FinancialRecords> { };
 
     // Create an event that will update the WPF document with the totals from the class.
@@ -113,10 +114,11 @@ public class Finances : INotifyPropertyChanged
         return _records;
     }
     public void SetFinancialRecord(FinancialRecords record)
-    {
-        Expenses += record.Expense;
-        record.ID = _records.Count + 1;
-        _records.Add(record);
+    {      
+            Expenses += record.Expense;
+            record.ID = _records.Count;
+            _records.Add(record);     
+        
     }
     public decimal Expenses
     {
