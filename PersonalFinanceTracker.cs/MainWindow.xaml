@@ -116,7 +116,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Content="Generate Report" Grid.Column="0" Margin="5" Click="Btn_GenerateReport"/>
-            <Button Content="Pay Expense" Grid.Column="1" Margin="5"/>
+            <Button Content="Pay Expense" Grid.Column="1" Margin="5" Click="Btn_PayExpense"/>
         </Grid>
 
         <!-- Footer Section -->

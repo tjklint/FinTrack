@@ -1,0 +1,56 @@
+﻿<Window x:Class="PersonalFinanceTracker.cs.Views.PayExpense"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PersonalFinanceTracker.cs.Views"
+        mc:Ignorable="d"
+        Title="PayExpense" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <StackPanel>
+            <TextBlock Text="Pay Expenses" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
+
+            <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="TOTAL BALANCE: " FontSize="16" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Balance}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
+                <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
+                <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
+            </StackPanel>
+            
+            <ListBox x:Name="lbExpenses" MouseDoubleClick="lbExpenses_MouseDoubleClick" Height="250">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Name:" FontWeight="Bold"/>
+                            <Label Content="{Binding CategoryName}" Grid.Column="1"/>
+                            <Label Content="Amount:" FontWeight="Bold" Grid.Column="2"/>
+                            <Label Content="{Binding Expense}" Grid.Column="3"/>
+                            <Label Content="Month:" FontWeight="Bold" Grid.Column="4"/>
+                            <Label Content="{Binding Month}" Grid.Column="5"/>
+                            <Label Content="Year:" FontWeight="Bold" Grid.Column="6"/>
+                            <Label Content="{Binding Year}" Grid.Column="7"/>
+                            <Label Content="Amount Payed:" FontWeight="Bold" Grid.Column="8"/>
+                            <Label Content="{Binding AmountPayed}" Grid.Column="9"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label HorizontalAlignment="Center">Amount:</Label>
+            <TextBox x:Name="ExpenseAmountTextBox" Width="100" ToolTip="Enter expense amount"/>
+            <Button Content="Pay Expense" Margin="0,5,0,0" Width="100" Click="Btn_PayExpense"/>
+        </StackPanel>
+    </Grid>
+</Window>

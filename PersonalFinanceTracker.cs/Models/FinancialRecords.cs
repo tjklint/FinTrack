@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CodeDom;
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Documents;
 
@@ -21,8 +22,14 @@ public class FinancialRecords
 		Month = month;
 		Year = year;
 	}
+    public event PropertyChangedEventHandler PropertyChanged;
 
-	public int ID
+    void OnPropertyChanged(string propertyName)
+    {
+      
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+    public int ID
 	{
 		get
 		{ return _id; }
@@ -46,7 +53,8 @@ public class FinancialRecords
 				throw new ArgumentException("Amount cannot be a negative.");
 			}
 			_expense = value;
-		}
+            OnPropertyChanged(nameof(Expense));
+        }
 	}
 
     public decimal IncomeSpent
@@ -66,6 +74,7 @@ public class FinancialRecords
         {
 
             _month = value;
+            OnPropertyChanged(nameof(Month));
         }
     }
 
@@ -76,6 +85,7 @@ public class FinancialRecords
         {
 
             _year = value;
+            OnPropertyChanged(nameof(Year));
         }
     }
 
@@ -92,7 +102,8 @@ public class FinancialRecords
 				throw new ArgumentException("Value must be a string.");
 			}
 			_categoryName = value;
-		}
+            OnPropertyChanged(nameof(CategoryName));
+        }
 	}
 
 
@@ -106,6 +117,7 @@ public class FinancialRecords
                 throw new ArgumentException("AmountPayed cannot be negative.");
             }
             _amountPayed = value;
+            OnPropertyChanged(nameof(AmountPayed));
         }
     }
 

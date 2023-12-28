@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalFinanceTracker.cs.Views;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -24,7 +25,7 @@ namespace PersonalFinanceTracker.cs
     {
         private Finances finances; // TODO: talk about this in doc (private)
         private List<string> categories;
-
+       
         public MainWindow()
         {
             InitializeComponent();
@@ -220,8 +221,7 @@ namespace PersonalFinanceTracker.cs
         private void DeleteCategory()
         {
             string filePath = "./categories.txt";
-            string line;
-            StreamWriter streamWriter=null;
+      
             try
             {
                 if (File.Exists(filePath))
@@ -240,6 +240,14 @@ namespace PersonalFinanceTracker.cs
                 Console.WriteLine($"Error:{ex.Message}");
             }
 
+        }
+
+        private void Btn_PayExpense(object sender, RoutedEventArgs e)
+        {
+            PayExpense payExpense = new PayExpense();
+            payExpense.Show();
+
+            this.Close();
         }
     }
 }
