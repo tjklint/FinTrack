@@ -20,7 +20,7 @@ namespace PersonalFinanceTracker.cs.Views
     /// </summary>
     public partial class PayExpense : Window
     {
-        List<FinancialRecords> financialRecords=new List<FinancialRecords>();
+        List<FinancialRecords> financialRecords = new List<FinancialRecords>();
         private Finances finances;
         public PayExpense()
         {
@@ -28,18 +28,18 @@ namespace PersonalFinanceTracker.cs.Views
 
             finances = new Finances();
             this.DataContext = finances;
-            lbExpenses.ItemsSource=finances.GetFinancialRecords();
+            lbExpenses.ItemsSource = finances.GetFinancialRecords();
 
         }
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
-            if(lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
+            if (lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
-                FinancialRecords record=lbExpenses.SelectedItem as FinancialRecords;             
-                    finances.PayExpense(record.ID, expenseAmount);
-                    ModifyFile(record);
-                    lbExpenses.Items.Refresh();
+                FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
+                finances.PayExpense(record.ID, expenseAmount);
+                ModifyFile(record);
+                lbExpenses.Items.Refresh();
             }
             else
             {
@@ -55,55 +55,37 @@ namespace PersonalFinanceTracker.cs.Views
         {
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
-            string line;
-            int count = 0; 
 
-            for (int i = 0; i < csvFiles.Length; i++)
+            foreach (string filePath in csvFiles)
             {
-                StreamReader reader = new StreamReader(csvFiles[i]);
                 try
                 {
-                    if (File.Exists(csvFiles[i]))
+                    string[] lines = File.ReadAllLines(filePath);
+                    for (int i = 0; i < lines.Length; i++)
                     {
-                        string[] test = { "hi" };
-                        StringBuilder builder = new StringBuilder();
-                        string[] lines = File.ReadAllLines(csvFiles[i]);
-                        while ((line = reader.ReadLine()) != null)
+                        string[] data = lines[i].Split(',');
+                        if (data[0] != "id" && int.Parse(data[0]) == record.ID)
                         {
-                            string[] data = line.Split(',');
-                            
-                                //Checks to see if its the header, if so skip it.
-                                if (data[0] == "id")
+                            data[2] = record.Expense.ToString();
+                            data[3] = record.AmountPayed.ToString();
+                            string newLine = "";
+                            for (int j = 0; j < data.Length; j++)
+                            {
+                                newLine += data[j];
+                                if (j < data.Length - 1)
                                 {
-                                  
+                                    newLine += ",";
                                 }
-                                else if (int.Parse(data[0])==record.ID)
-                                {                                                           
-                                    data[2] = record.Expense.ToString();
-                                    data[3] = record.AmountPayed.ToString();
-                                    lines[count] = $"{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}";
-                                    
-                                }
-                             
-                            count++;
+                            }
+                            lines[i] = newLine;
                         }
-                        for (int j = 0; j < lines.Length; j++)
-                        {
-                            builder.Append(lines[j]);
-                        }
-                        File.WriteAllText(csvFiles[i],builder.ToString());
                     }
+                    File.WriteAllLines(filePath, lines);
                 }
                 catch (IOException ex)
                 {
-                    Console.WriteLine($"Error:{ex.Message}");
+                    Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
                 }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
             }
         }
     }
