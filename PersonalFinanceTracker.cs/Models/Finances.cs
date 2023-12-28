@@ -178,6 +178,7 @@ public class Finances : INotifyPropertyChanged
             Balance -= amount;
             Expenses -= amount;
             _records[id].Expense -= amount;
+            SubtractIncome(amount);
         }
         
         return Balance;
@@ -191,6 +192,20 @@ public class Finances : INotifyPropertyChanged
         }
         Expenses += amount;
         _records[id].Expense += amount;
+    }
+    private void SubtractIncome(decimal amount)
+    {
+        string incomeFilePath = "income.txt";
+        if (File.Exists(incomeFilePath))
+        {
+            // Read the existing balance from the file
+            string balanceStr = File.ReadAllText(incomeFilePath);
+            decimal.TryParse(balanceStr, out _balance);
+            _balance = Math.Round(_balance, 2);
+            _balance -= Math.Round(amount,2);
+            File.WriteAllText(incomeFilePath, _balance.ToString());
+        }
+        
     }
 
 
