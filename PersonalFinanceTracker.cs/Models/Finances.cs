@@ -207,6 +207,10 @@ public class Finances : INotifyPropertyChanged
         }
         
     }
+    public void DeleteRecord(FinancialRecords record)
+    {
+        _records.Remove(record);      
+    }
 
 
 }
