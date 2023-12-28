@@ -86,9 +86,41 @@ namespace PersonalFinanceTracker.cs.Views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_DeleteExpense(object sender, RoutedEventArgs e)
         {
+            string folderPath = "./";
+            string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
 
+            if (lbExpenses.SelectedItem is not null)
+            {
+                FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
+                foreach (string filePath in csvFiles)
+                {
+                    try
+                    {
+                        string[] lines = File.ReadAllLines(filePath);
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            string[] data = lines[i].Split(',');
+                            if (data[0] != "id" && int.Parse(data[0]) == record.ID)
+                            {                                
+                                lines[i] = "";
+                            }
+                        }
+                        File.WriteAllLines(filePath, lines);
+           
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an expense.");
+            }
+           
         }
     }
 }

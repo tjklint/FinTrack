@@ -57,7 +57,7 @@
                 </Grid.ColumnDefinitions>
                
                 <Button Content="Pay Expense" Margin="0,5,0,0" Width="100" Grid.Column="0" Click="Btn_PayExpense"/>
-                <Button Content="Delete Expense" Margin="0,5,0,0" Width="100" Grid.Column="1" Click="Button_Click"/>
+                <Button Content="Delete Expense" Margin="0,5,0,0" Width="100" Grid.Column="1" Click="Btn_DeleteExpense"/>
             </Grid>
             
         </StackPanel>
