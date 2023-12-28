@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
+using System.Windows;
 
 // Implements the INotifyPropertyChanged interface.
 // This interface is used to make changes and provide notifications when the value
@@ -165,16 +166,20 @@ public class Finances : INotifyPropertyChanged
     {
         if (_records[id].Expense - amount < 0)
         {
-            throw new ArgumentException("Amount exceeds expense.");
+            MessageBox.Show("Amount exceeds the expense.");
         }
-        if (Balance - amount < 0)
+        else if (Balance - amount < 0)
         {
-            // TODO: Add notification to notify users before they go into debt
+            MessageBox.Show("You will go into debt if you pay off this expense!");
         }
-        _records[id].IncomeSpent += amount;
-        Balance -= amount;
-        Expenses -= amount;
-        _records[id].Expense -= amount;
+        else
+        {
+            _records[id].IncomeSpent += amount;
+            Balance -= amount;
+            Expenses -= amount;
+            _records[id].Expense -= amount;
+        }
+        
         return Balance;
     }
 
