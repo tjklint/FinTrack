@@ -18,7 +18,7 @@
                 <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             </StackPanel>
             
-            <ListBox x:Name="lbExpenses" MouseDoubleClick="lbExpenses_MouseDoubleClick" Height="250">
+            <ListBox x:Name="lbExpenses" Height="250">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -49,8 +49,17 @@
                 </ListBox.ItemTemplate>
             </ListBox>
             <Label HorizontalAlignment="Center">Amount:</Label>
-            <TextBox x:Name="ExpenseAmountTextBox" Width="100" ToolTip="Enter expense amount"/>
-            <Button Content="Pay Expense" Margin="0,5,0,0" Width="100" Click="Btn_PayExpense"/>
+            <TextBox x:Name="ExpenseAmountTextBox" Width="100" ToolTip="Enter amount"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+               
+                <Button Content="Pay Expense" Margin="0,5,0,0" Width="100" Grid.Column="0" Click="Btn_PayExpense"/>
+                <Button Content="Delete Expense" Margin="0,5,0,0" Width="100" Grid.Column="1" Click="Button_Click"/>
+            </Grid>
+            
         </StackPanel>
     </Grid>
 </Window>

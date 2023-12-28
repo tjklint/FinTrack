@@ -47,10 +47,7 @@ namespace PersonalFinanceTracker.cs.Views
             }
         }
 
-        private void lbExpenses_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+       
         private void ModifyFile(FinancialRecords record)
         {
             string folderPath = "./";
@@ -87,6 +84,11 @@ namespace PersonalFinanceTracker.cs.Views
                     Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
                 }
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
