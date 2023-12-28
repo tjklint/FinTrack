@@ -47,10 +47,7 @@ namespace PersonalFinanceTracker.cs.Views
             }
         }
 
-        private void lbExpenses_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-
-        }
+       
         private void ModifyFile(FinancialRecords record)
         {
             string folderPath = "./";
@@ -87,6 +84,57 @@ namespace PersonalFinanceTracker.cs.Views
                     Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
                 }
             }
+        }
+
+        private void Btn_DeleteExpense(object sender, RoutedEventArgs e)
+        {
+            string folderPath = "./";
+            string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
+
+            if (lbExpenses.SelectedItem is not null)
+            {
+                FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
+                foreach (string filePath in csvFiles)
+                {
+                    try
+                    {
+                        string[] lines = File.ReadAllLines(filePath);
+                        StringBuilder builder= new StringBuilder();
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            string[] data = lines[i].Split(',');
+                            if (data[0] != "id" && int.Parse(data[0]) == record.ID)
+                            {
+
+                            }
+                            else
+                            { 
+                                builder.Append($"{lines[i]}\n");
+                            }
+                        }
+                        File.WriteAllText(filePath, builder.ToString());
+                        finances.DeleteRecord(record);
+                        lbExpenses.Items.Refresh();
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an expense.");
+            }
+           
+        }
+
+        private void Btn_BackToTracker(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+
+            this.Close();
         }
     }
 }
