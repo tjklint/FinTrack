@@ -99,16 +99,22 @@ namespace PersonalFinanceTracker.cs.Views
                     try
                     {
                         string[] lines = File.ReadAllLines(filePath);
+                        StringBuilder builder= new StringBuilder();
                         for (int i = 0; i < lines.Length; i++)
                         {
                             string[] data = lines[i].Split(',');
                             if (data[0] != "id" && int.Parse(data[0]) == record.ID)
-                            {                                
-                                lines[i] = "";
+                            {
+
+                            }
+                            else
+                            { 
+                                builder.Append($"{lines[i]}\n");
                             }
                         }
-                        File.WriteAllLines(filePath, lines);
-           
+                        File.WriteAllText(filePath, builder.ToString());
+                        finances.DeleteRecord(record);
+                        lbExpenses.Items.Refresh();
                     }
                     catch (IOException ex)
                     {
