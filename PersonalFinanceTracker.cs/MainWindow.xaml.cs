@@ -221,8 +221,7 @@ namespace PersonalFinanceTracker.cs
         private void DeleteCategory()
         {
             string filePath = "./categories.txt";
-            string line;
-            StreamWriter streamWriter=null;
+      
             try
             {
                 if (File.Exists(filePath))
