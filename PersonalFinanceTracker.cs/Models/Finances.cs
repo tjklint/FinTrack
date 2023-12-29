@@ -174,6 +174,7 @@ public class Finances : INotifyPropertyChanged
         }
         else
         {
+            _records[id].AmountPayed += amount;
             _records[id].IncomeSpent += amount;
             Balance -= amount;
             Expenses -= amount;
@@ -209,7 +210,8 @@ public class Finances : INotifyPropertyChanged
     }
     public void DeleteRecord(FinancialRecords record)
     {
-        _records.Remove(record);      
+        _records.Remove(record);
+        Expenses -= record.Expense;
     }
 
 
