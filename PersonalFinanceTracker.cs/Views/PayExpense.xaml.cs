@@ -29,13 +29,14 @@ namespace PersonalFinanceTracker.cs.Views
             finances = new Finances();
             this.DataContext = finances;
             lbExpenses.ItemsSource = finances.GetFinancialRecords();
-
+            lbExpenses.Items.Refresh();
         }
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
             if (lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
+                
                 FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
                 finances.PayExpense(record.ID, expenseAmount);
                 ModifyFile(record);
