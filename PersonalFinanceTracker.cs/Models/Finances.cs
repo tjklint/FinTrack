@@ -129,6 +129,7 @@ public class Finances : INotifyPropertyChanged
         }
         private set
         {
+            //add validation
             _expenses = value;
             OnPropertyChanged(nameof(Expenses)); // Notify that expenses has been changed.
         }
@@ -164,6 +165,7 @@ public class Finances : INotifyPropertyChanged
 
     public decimal PayExpense(int id, decimal amount)
     {
+        MessageBox.Show(id.ToString());
         if (_records[id].Expense - amount < 0)
         {
             MessageBox.Show("Amount exceeds the expense.");

@@ -63,9 +63,10 @@ namespace PersonalFinanceTracker.cs.Views
                         string[] data = lines[i].Split(',');
                         if (data[0] != "id" && int.Parse(data[0]) == record.ID)
                         {
+                            
                             data[5] = record.AmountPayed.ToString();
                             data[2] = record.Expense.ToString();
-                            data[3] = record.AmountPayed.ToString();
+                            
                             string newLine = "";
                             for (int j = 0; j < data.Length; j++)
                             {
