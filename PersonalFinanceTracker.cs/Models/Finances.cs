@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.IO;
 using System.Windows;
+using System.Windows.Shapes;
 
 // Implements the INotifyPropertyChanged interface.
 // This interface is used to make changes and provide notifications when the value
@@ -92,6 +93,15 @@ public class Finances : INotifyPropertyChanged
                 }
             }
         }
+        //The list needs to be sorted here as if we have a csv file that is from April and one from January,
+        //the file from April will be read first, the issue is, that means that the _records list won't be
+        //ordered properly by id, because if we have something with an id of 2 in April itll be first in the list
+        //which completely ruins how the list is supposed to work with the record ids.
+
+        //By using the sort method for a list and CompareTo, I can compare the two ids of two FinancialRecords
+        //and it'll sort them accordingly after the comparison is made.
+        _records.Sort((record1, record2) => record1.ID.CompareTo(record2.ID));
+       
     }
     #endregion
 
@@ -118,7 +128,8 @@ public class Finances : INotifyPropertyChanged
     {      
             Expenses += record.Expense;
             record.ID = _records.Count;
-            _records.Add(record);     
+            _records.Add(record);
+ 
         
     }
     public decimal Expenses
@@ -165,7 +176,7 @@ public class Finances : INotifyPropertyChanged
 
     public decimal PayExpense(int id, decimal amount)
     {
-        MessageBox.Show(id.ToString());
+        
         if (_records[id].Expense - amount < 0)
         {
             MessageBox.Show("Amount exceeds the expense.");
