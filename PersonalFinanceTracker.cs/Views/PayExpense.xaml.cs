@@ -108,7 +108,8 @@ namespace PersonalFinanceTracker.cs.Views
                             string[] data = lines[i].Split(',');
                             if (data[0] != "id" && int.Parse(data[0]) == record.ID)
                             {
-
+                                finances.DeleteRecord(record);
+                              
                             }
                             else
                             { 
@@ -116,7 +117,6 @@ namespace PersonalFinanceTracker.cs.Views
                             }
                         }
                         File.WriteAllText(filePath, builder.ToString());
-                        finances.DeleteRecord(record);
                         lbExpenses.Items.Refresh();
                     }
                     catch (IOException ex)

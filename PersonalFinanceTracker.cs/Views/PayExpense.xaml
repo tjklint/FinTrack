@@ -18,8 +18,8 @@
                 <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             </StackPanel>
             
-            <ListBox x:Name="lbExpenses" Height="250">
-                <ListBox.ItemTemplate>
+            <DataGrid x:Name="lbExpenses" Height="250">
+                <!--<DataGrid.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -46,8 +46,8 @@
                             <Label Content="{Binding AmountPayed}" Grid.Column="9"/>
                         </Grid>
                     </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                </DataGrid.ItemTemplate>-->
+            </DataGrid>
             <Label HorizontalAlignment="Center">Amount:</Label>
             <TextBox x:Name="ExpenseAmountTextBox" Width="100" ToolTip="Enter amount"/>
             <Grid>

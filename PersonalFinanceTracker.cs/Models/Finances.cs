@@ -139,10 +139,13 @@ public class Finances : INotifyPropertyChanged
             return _expenses;
         }
         private set
-        {
-            //add validation
+        {       
+            if(value<0)
+            {
+               throw new ArgumentException("Expense value cannot be less than 0");
+            }
             _expenses = value;
-            OnPropertyChanged(nameof(Expenses)); // Notify that expenses has been changed.
+            OnPropertyChanged(nameof(Expenses)); 
         }
     }
 
@@ -222,9 +225,10 @@ public class Finances : INotifyPropertyChanged
         
     }
     public void DeleteRecord(FinancialRecords record)
-    {
-        _records.Remove(record);
+    {      
         Expenses -= record.Expense;
+        _records.Remove(record);
+
     }
 
 
