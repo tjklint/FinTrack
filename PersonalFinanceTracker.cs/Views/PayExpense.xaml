@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="PayExpense" Height="500" Width="800"
         WindowStartupLocation="CenterScreen">
+    <!--Window.Resources allows the user of the Style tag which will be used to customize the buttons.-->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#5D5C61" />
@@ -15,14 +16,8 @@
             <Setter Property="BorderBrush" Value="#005580" />
             <Setter Property="Padding" Value="9" />
         </Style>
-        <Style TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="#C2B9B0"/>
-        </Style>
-        <Style TargetType="TextBlock">
-            
-        </Style>
     </Window.Resources>
-    <Grid Margin="10" Background="#B1A296">
+    <Grid Background="#B1A296">
         
         <StackPanel>
             <TextBlock Text="Pay Expenses" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
@@ -33,8 +28,8 @@
                 <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
                 <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             </StackPanel>
-            
-            <DataGrid x:Name="lbExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0">
+
+            <DataGrid x:Name="lbExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0" AlternatingRowBackground="#C2B9B0">
               
             </DataGrid>
             <Label HorizontalAlignment="Center" Foreground="White">Amount:</Label>
