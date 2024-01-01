@@ -2,6 +2,7 @@
 using System.CodeDom;
 using System.ComponentModel;
 using System.IO;
+using System.Windows;
 using System.Windows.Documents;
 
 public class FinancialRecords
@@ -37,8 +38,8 @@ public class FinancialRecords
 		{
 			if (_id < 0)
 			{
-				throw new ArgumentException("Id cannot be a negative.");
-			}
+                MessageBox.Show("Id cannot be negative.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
 			_id = value;
 		}
 	}
@@ -50,7 +51,7 @@ public class FinancialRecords
 		{
 			if (_expense < 0)
 			{
-				throw new ArgumentException("Amount cannot be a negative.");
+				MessageBox.Show("Amount cannot be a negative.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 			_expense = value;
             OnPropertyChanged(nameof(Expense));
@@ -114,7 +115,7 @@ public class FinancialRecords
         {
             if (value < 0)
             {
-                throw new ArgumentException("AmountPayed cannot be negative.");
+                MessageBox.Show("Amount Payed cannot be negative.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _amountPayed = value;
             OnPropertyChanged(nameof(AmountPayed));

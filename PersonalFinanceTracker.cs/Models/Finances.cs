@@ -142,7 +142,7 @@ public class Finances : INotifyPropertyChanged
         {       
             if(value<0)
             {
-               throw new ArgumentException("Expense value cannot be less than 0");
+                MessageBox.Show("Expense value cannot be less than 0", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _expenses = value;
             OnPropertyChanged(nameof(Expenses)); 
@@ -159,7 +159,7 @@ public class Finances : INotifyPropertyChanged
         {
             if (value < 0)
             {
-                throw new ArgumentException("Income cannot be less than 0.");
+                MessageBox.Show("Income value cannot be less than 0", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _income = value;
         }
@@ -169,7 +169,7 @@ public class Finances : INotifyPropertyChanged
     {
         if (amount < 0)
         {
-            throw new ArgumentException("Added income cannot be a negative.");
+            MessageBox.Show("Added income cannot be negative", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         amount = Math.Round(amount, 2);
         Income += amount;
@@ -182,7 +182,7 @@ public class Finances : INotifyPropertyChanged
         
         if (_records[id].Expense - amount < 0)
         {
-            MessageBox.Show("Amount exceeds the expense.");
+            MessageBox.Show("Amount cannot exceed expense.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         else if (Balance - amount < 0)
         {
@@ -205,7 +205,7 @@ public class Finances : INotifyPropertyChanged
     {
         if (amount < 0)
         {
-            throw new ArgumentException("Amount cannot be less than 0.");
+            MessageBox.Show("Amount cannot be less than 0.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         Expenses += amount;
         _records[id].Expense += amount;

@@ -84,7 +84,7 @@ namespace PersonalFinanceTracker.cs.Views
                 }
                 catch (IOException ex)
                 {
-                    Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
+                    MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -120,8 +120,8 @@ namespace PersonalFinanceTracker.cs.Views
                         lbExpenses.Items.Refresh();
                     }
                     catch (IOException ex)
-                    {
-                        Console.WriteLine($"Error updating file '{filePath}': {ex.Message}");
+                    { 
+                        MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
