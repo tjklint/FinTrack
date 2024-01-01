@@ -111,15 +111,14 @@ namespace PersonalFinanceTracker.cs
                         //if statement is important.
                         if (filePath != reportFile)
                         {
-                           
-                           
-                           
+                                                 
                                 string[] lines = File.ReadAllLines(filePath);
                                 StringBuilder builder = new StringBuilder();
 
                                 for (int i = 0; i < lines.Length; i++)
                                 {
                                     string[] data = lines[i].Split(',');
+                                    //Makes sure that the header isn't added to the file.
                                     if (data[0] == "id")
                                     {
 
@@ -129,15 +128,12 @@ namespace PersonalFinanceTracker.cs
                                         builder.Append($"{lines[i]}\n");
                                     }
                                 }
-                                writer.WriteLine(builder.ToString());
-
-                                                      
+                                writer.WriteLine(builder.ToString());                                                   
 
                         }
 
                     }
-                    writer.Close();
-
+                    //Message saying that its been updated.
                     MessageBox.Show($"Updated report in ./Finance_Report.csv");
                 }
             }
@@ -147,6 +143,7 @@ namespace PersonalFinanceTracker.cs
             }
             finally
             {
+                //Closes the writer.
                 if(writer!=null)
                 writer.Close();
             }
