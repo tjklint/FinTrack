@@ -98,17 +98,17 @@ namespace PersonalFinanceTracker.cs
             if (File.Exists(reportFile))
             {
                 writer.WriteLine($"Balance:{finances.Balance}");
-                writer.WriteLine($"Expenses:{finances.Expenses}");
+                writer.WriteLine($"Expenses:{finances.Expenses}\n");
+                writer.WriteLine($"All Expenses:\n");
+                writer.Write("id,category,amount,month,year,amountpayed");
                 //Reads through all the files.
                 foreach (string filePath in csvFiles)
                 {
-                    if (filePath == reportFile)
+                    //If the file already exists, that means that it most likely is now in the csvFiles array.
+                    //And we don't want to re-write everything thats existing into the file again, that is why this
+                    //if statement is important.
+                    if (filePath != reportFile)
                     {
-
-                    }
-                    else
-                    {
-
 
                         try
                         {
