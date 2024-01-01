@@ -93,48 +93,57 @@ namespace PersonalFinanceTracker.cs
         {
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
-            string line;
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < csvFiles.Length; i++)
+            string reportFile = "Finance_Report.csv";
+            if (File.Exists(reportFile))
             {
-                StreamReader reader = new StreamReader(csvFiles[i]);
-                try
+                //Reads through all the files.
+                foreach (string filePath in csvFiles)
                 {
-                    if (File.Exists(csvFiles[i]))
+                    try
                     {
-                        while ((line = reader.ReadLine()) != null)
+                        string[] lines = File.ReadAllLines(filePath);
+                        StringBuilder builder = new StringBuilder();
+                        for (int i = 0; i < lines.Length; i++)
                         {
-                            string[] data=line.Split(',');
-                            foreach(string info in data)
-                            {
-                                //Checks to see if its the header, the header must be formatted differently.
-                                if (data[0] == "id")
-                                {
-                                    builder.Append( $"{info,-14}");
-                                }
-                                else
-                                {
-                                    builder.Append($"{info,-16}");
-                                }
-                               
-                            }
-                            builder.Append("\n");
+                            builder.Append($"{lines[i]}\n");
                         }
+                        //Write everything back to the file.
+                        File.WriteAllText(reportFile, builder.ToString());
+
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
-                catch (IOException ex)
-                {
-                    Console.WriteLine($"Error:{ex.Message}");
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
             }
+            else
+            {
+                FileStream newfile = File.Create(reportFile);
 
-            MessageBox.Show(builder.ToString());
+                //Reads through all the files.
+                foreach (string filePath in csvFiles)
+                {
+                    try
+                    {
+                        string[] lines = File.ReadAllLines(filePath);
+                        StringBuilder builder = new StringBuilder();
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            builder.Append($"{lines[i]}\n");
+                        }
+                        //Write everything back to the file.
+                        File.WriteAllText(reportFile, builder.ToString());
+
+                    }
+                    catch (IOException ex)
+                    {
+                        MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
+            }
+                
+
         }
 
         private void Btn_AddExpense(object sender, RoutedEventArgs e)

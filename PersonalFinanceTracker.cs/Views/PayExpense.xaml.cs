@@ -57,12 +57,14 @@ namespace PersonalFinanceTracker.cs.Views
         private void ModifyFile(FinancialRecords record)
         {
             string folderPath = "./";
+            //Gets all csv files.
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
 
             foreach (string filePath in csvFiles)
             {
                 try
                 {
+                    //Gets all rows from the csv file.
                     string[] lines = File.ReadAllLines(filePath);
                     for (int i = 0; i < lines.Length; i++)
                     {
