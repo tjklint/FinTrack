@@ -124,10 +124,12 @@ public class FinancialRecords
 
     public void AddToFile()
     {      
+        //Creates a file with the month and year.
         string filePath = $"Financial_Record_{Month}_{Year}.csv";
 
 		try
 		{
+            //If the file exists proceed to adding to the file, if not create it then add.
             if (File.Exists(filePath))
             {
 				StreamWriter writer=new StreamWriter(filePath);

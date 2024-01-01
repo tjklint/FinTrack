@@ -93,48 +93,57 @@ namespace PersonalFinanceTracker.cs
         {
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
-            string line;
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < csvFiles.Length; i++)
+            string reportFile = "./Finance_Report.csv";
+            StreamWriter writer=new StreamWriter(reportFile);
+            try
             {
-                StreamReader reader = new StreamReader(csvFiles[i]);
-                try
+                if (File.Exists(reportFile))
                 {
-                    if (File.Exists(csvFiles[i]))
+                    writer.Write("id,category,amount,month,year,amountpayed\n");
+                    //Reads through all the files.
+                    foreach (string filePath in csvFiles)
                     {
-                        while ((line = reader.ReadLine()) != null)
+                        //If the file already exists, that means that it most likely is now in the csvFiles array.
+                        //And we don't want to re-write everything thats existing into the file again, that is why this
+                        //if statement is important.
+                        if (filePath != reportFile)
                         {
-                            string[] data=line.Split(',');
-                            foreach(string info in data)
-                            {
-                                //Checks to see if its the header, the header must be formatted differently.
-                                if (data[0] == "id")
+                                                 
+                                string[] lines = File.ReadAllLines(filePath);
+                                StringBuilder builder = new StringBuilder();
+
+                                for (int i = 0; i < lines.Length; i++)
                                 {
-                                    builder.Append( $"{info,-14}");
+                                    string[] data = lines[i].Split(',');
+                                    //Makes sure that the header isn't added to the file.
+                                    if (data[0] == "id")
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        builder.Append($"{lines[i]}\n");
+                                    }
                                 }
-                                else
-                                {
-                                    builder.Append($"{info,-16}");
-                                }
-                               
-                            }
-                            builder.Append("\n");
+                                writer.Write(builder.ToString());                                                   
+
                         }
+
                     }
+                    //Message saying that its been updated.
+                    MessageBox.Show($"Updated report in ./Finance_Report.csv");
                 }
-                catch (IOException ex)
-                {
-                    Console.WriteLine($"Error:{ex.Message}");
-                }
-                finally
-                {
-                    if (reader != null)
-                        reader.Close();
-                }
-
             }
-
-            MessageBox.Show(builder.ToString());
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Error updating file", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                //Closes the writer.
+                if(writer!=null)
+                writer.Close();
+            }
         }
 
         private void Btn_AddExpense(object sender, RoutedEventArgs e)

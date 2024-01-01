@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PayExpense" Height="500" Width="800"
         WindowStartupLocation="CenterScreen">
-    <!--Window.Resources allows the user of the Style tag which will be used to customize the buttons.-->
+    <!--Window.Resources allows the use of the Style tag which will be used to customize the buttons.-->
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#5D5C61" />
@@ -28,8 +28,8 @@
                 <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
                 <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             </StackPanel>
-
-            <DataGrid x:Name="lbExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0" AlternatingRowBackground="#C2B9B0">
+            <!--The Data Grid will help display all the data from the csv files in an organized and clean manner.-->
+            <DataGrid x:Name="GridExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0" AlternatingRowBackground="#C2B9B0">
               
             </DataGrid>
             <Label HorizontalAlignment="Center" Foreground="White">Amount:</Label>
