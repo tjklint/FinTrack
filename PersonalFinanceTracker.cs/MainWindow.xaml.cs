@@ -96,6 +96,8 @@ namespace PersonalFinanceTracker.cs
             string reportFile = "Finance_Report.csv";
             if (File.Exists(reportFile))
             {
+                File.WriteAllText(reportFile, $"Balance:{finances.Balance}");
+                File.WriteAllText(reportFile, $"Expenses:{finances.Expenses}");
                 //Reads through all the files.
                 foreach (string filePath in csvFiles)
                 {
@@ -116,11 +118,13 @@ namespace PersonalFinanceTracker.cs
                         MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                File.Open(reportFile,FileMode.Open);
             }
             else
             {
                 FileStream newfile = File.Create(reportFile);
-
+                File.WriteAllText(reportFile, $"Balance:{finances.Balance}");
+                File.WriteAllText(reportFile, $"Expenses:{finances.Expenses}");
                 //Reads through all the files.
                 foreach (string filePath in csvFiles)
                 {
@@ -141,6 +145,7 @@ namespace PersonalFinanceTracker.cs
                         MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
+                File.Open(reportFile, FileMode.Open);
             }
                 
 
