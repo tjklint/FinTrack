@@ -139,35 +139,10 @@ namespace PersonalFinanceTracker.cs
                     
                 }
                 writer.Close();
-                File.Open(reportFile, FileMode.Open);
-            }
-            else
-            {
-                FileStream newfile = File.Create(reportFile);
-                File.WriteAllText(reportFile, $"Balance:{finances.Balance}");
-                File.WriteAllText(reportFile, $"Expenses:{finances.Expenses}");
-                //Reads through all the files.
-                foreach (string filePath in csvFiles)
-                {
-                    try
-                    {
-                        string[] lines = File.ReadAllLines(filePath);
-                        StringBuilder builder = new StringBuilder();
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            builder.Append($"{lines[i]}\n");
-                        }
-                        //Write everything back to the file.
-                        File.WriteAllText(reportFile, builder.ToString());
 
-                    }
-                    catch (IOException ex)
-                    {
-                        MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                }
-                File.Open(reportFile, FileMode.Open);
+                MessageBox.Show($"Updated report in ./Finance_Report.csv");
             }
+          
                 
 
         }
