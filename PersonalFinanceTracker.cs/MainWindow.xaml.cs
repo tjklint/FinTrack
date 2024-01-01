@@ -125,7 +125,7 @@ namespace PersonalFinanceTracker.cs
                                         builder.Append($"{lines[i]}\n");
                                     }
                                 }
-                                writer.WriteLine(builder.ToString());                                                   
+                                writer.Write(builder.ToString());                                                   
 
                         }
 
