@@ -94,31 +94,52 @@ namespace PersonalFinanceTracker.cs
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
             string reportFile = "Finance_Report.csv";
+            StreamWriter writer=new StreamWriter(reportFile);
             if (File.Exists(reportFile))
             {
-                File.WriteAllText(reportFile, $"Balance:{finances.Balance}");
-                File.WriteAllText(reportFile, $"Expenses:{finances.Expenses}");
+                writer.WriteLine($"Balance:{finances.Balance}");
+                writer.WriteLine($"Expenses:{finances.Expenses}");
                 //Reads through all the files.
                 foreach (string filePath in csvFiles)
                 {
-                    try
+                    if (filePath == reportFile)
                     {
-                        string[] lines = File.ReadAllLines(filePath);
-                        StringBuilder builder = new StringBuilder();
-                        for (int i = 0; i < lines.Length; i++)
-                        {
-                            builder.Append($"{lines[i]}\n");
-                        }
-                        //Write everything back to the file.
-                        File.WriteAllText(reportFile, builder.ToString());
 
                     }
-                    catch (IOException ex)
+                    else
                     {
-                        MessageBox.Show($"Error updating file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+                        try
+                        {
+                            string[] lines = File.ReadAllLines(filePath);
+                            StringBuilder builder = new StringBuilder();
+
+                            for (int i = 0; i < lines.Length; i++)
+                            {
+                                string[] data = lines[i].Split(',');
+                                if (data[0] == "id")
+                                {
+
+                                }
+                                else
+                                {
+                                    builder.Append($"{lines[i]}\n");
+                                }
+                            }                       
+                            writer.WriteLine(builder.ToString());
+                           
+                        }
+                        catch (IOException ex)
+                        {
+                            MessageBox.Show($"Error reading file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                       
                     }
+                    
                 }
-                File.Open(reportFile,FileMode.Open);
+                writer.Close();
+                File.Open(reportFile, FileMode.Open);
             }
             else
             {
