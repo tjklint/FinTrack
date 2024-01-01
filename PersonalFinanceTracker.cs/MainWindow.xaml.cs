@@ -99,10 +99,7 @@ namespace PersonalFinanceTracker.cs
             {
                 if (File.Exists(reportFile))
                 {
-                    writer.WriteLine($"Balance:{finances.Balance}");
-                    writer.WriteLine($"Expenses:{finances.Expenses}\n");
-                    writer.WriteLine($"All Expenses:\n");
-                    writer.Write("id,category,amount,month,year,amountpayed");
+                    writer.Write("id,category,amount,month,year,amountpayed\n");
                     //Reads through all the files.
                     foreach (string filePath in csvFiles)
                     {

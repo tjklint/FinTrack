@@ -46,6 +46,7 @@ namespace PersonalFinanceTracker.cs.Views
                 ModifyFile(record);
                 //Refresh the grid.
                 GridExpenses.Items.Refresh();
+                ExpenseAmountTextBox.Clear();
             }
             else
             {
