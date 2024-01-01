@@ -26,25 +26,30 @@ namespace PersonalFinanceTracker.cs.Views
         {
             InitializeComponent();
 
+            //Gets a finance object to essentially build the data on the page.
             finances = new Finances();
             this.DataContext = finances;
-            lbExpenses.ItemsSource = finances.GetFinancialRecords();
-            lbExpenses.Items.Refresh();
+            GridExpenses.ItemsSource = finances.GetFinancialRecords();
+            GridExpenses.Items.Refresh();
         }
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
-            if (lbExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
+            //Checks to make sure that an expense was selected and an amount was inputted.
+            if (GridExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
-                
-                FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
+                //Gets the selected record.
+                FinancialRecords record = GridExpenses.SelectedItem as FinancialRecords;
+                //Pays off the expense.
                 finances.PayExpense(record.ID, expenseAmount);
+                //Modify the file that the record was in.
                 ModifyFile(record);
-                lbExpenses.Items.Refresh();
+                //Refresh the grid.
+                GridExpenses.Items.Refresh();
             }
             else
             {
-                MessageBox.Show("Please select an expense.");
+                MessageBox.Show("Please select an expense and input an amount.");
             }
         }
 
@@ -62,9 +67,10 @@ namespace PersonalFinanceTracker.cs.Views
                     for (int i = 0; i < lines.Length; i++)
                     {
                         string[] data = lines[i].Split(',');
+                        //Checks to find the record we want to change.
                         if (data[0] != "id" && int.Parse(data[0]) == record.ID)
                         {
-                            
+                            //Update the record in the file.
                             data[5] = record.AmountPayed.ToString();
                             data[2] = record.Expense.ToString();
                             
@@ -80,6 +86,7 @@ namespace PersonalFinanceTracker.cs.Views
                             lines[i] = newLine;
                         }
                     }
+                    //Write everything back to the file.
                     File.WriteAllLines(filePath, lines);
                 }
                 catch (IOException ex)
@@ -94,9 +101,11 @@ namespace PersonalFinanceTracker.cs.Views
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
 
-            if (lbExpenses.SelectedItem is not null)
+            if (GridExpenses.SelectedItem is not null)
             {
-                FinancialRecords record = lbExpenses.SelectedItem as FinancialRecords;
+                //Gets the expense that was chosen.
+                FinancialRecords record = GridExpenses.SelectedItem as FinancialRecords;
+                //Reads through all the files.
                 foreach (string filePath in csvFiles)
                 {
                     try
@@ -105,19 +114,22 @@ namespace PersonalFinanceTracker.cs.Views
                         StringBuilder builder= new StringBuilder();
                         for (int i = 0; i < lines.Length; i++)
                         {
+                            //Gets the data from each line.
                             string[] data = lines[i].Split(',');
+                            //Checks to see if its the record wanting to be deleted.
                             if (data[0] != "id" && int.Parse(data[0]) == record.ID)
                             {
-                                finances.DeleteRecord(record);
-                              
+                                //Deletes record from the list and skips putting it into the string builder.
+                                finances.DeleteRecord(record);                              
                             }
                             else
                             { 
                                 builder.Append($"{lines[i]}\n");
                             }
                         }
+                        //Write everything back to the file.
                         File.WriteAllText(filePath, builder.ToString());
-                        lbExpenses.Items.Refresh();
+                        GridExpenses.Items.Refresh();
                     }
                     catch (IOException ex)
                     { 
@@ -134,9 +146,11 @@ namespace PersonalFinanceTracker.cs.Views
 
         private void Btn_BackToTracker(object sender, RoutedEventArgs e)
         {
+            //Creates an object of the main window.
             MainWindow mainWindow = new MainWindow();
+            //Opens the main window.
             mainWindow.Show();
-
+            //Closes the Pay Expense window.
             this.Close();
         }
     }

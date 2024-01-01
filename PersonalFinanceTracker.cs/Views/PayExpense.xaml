@@ -29,7 +29,7 @@
                 <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
             </StackPanel>
 
-            <DataGrid x:Name="lbExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0" AlternatingRowBackground="#C2B9B0">
+            <DataGrid x:Name="GridExpenses" Height="250" Background="#5D5C61" RowBackground="#C2B9B0" AlternatingRowBackground="#C2B9B0">
               
             </DataGrid>
             <Label HorizontalAlignment="Center" Foreground="White">Amount:</Label>
