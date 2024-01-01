@@ -93,58 +93,63 @@ namespace PersonalFinanceTracker.cs
         {
             string folderPath = "./";
             string[] csvFiles = Directory.GetFiles(folderPath, "*.csv");
-            string reportFile = "Finance_Report.csv";
+            string reportFile = "./Finance_Report.csv";
             StreamWriter writer=new StreamWriter(reportFile);
-            if (File.Exists(reportFile))
+            try
             {
-                writer.WriteLine($"Balance:{finances.Balance}");
-                writer.WriteLine($"Expenses:{finances.Expenses}\n");
-                writer.WriteLine($"All Expenses:\n");
-                writer.Write("id,category,amount,month,year,amountpayed");
-                //Reads through all the files.
-                foreach (string filePath in csvFiles)
+                if (File.Exists(reportFile))
                 {
-                    //If the file already exists, that means that it most likely is now in the csvFiles array.
-                    //And we don't want to re-write everything thats existing into the file again, that is why this
-                    //if statement is important.
-                    if (filePath != reportFile)
+                    writer.WriteLine($"Balance:{finances.Balance}");
+                    writer.WriteLine($"Expenses:{finances.Expenses}\n");
+                    writer.WriteLine($"All Expenses:\n");
+                    writer.Write("id,category,amount,month,year,amountpayed");
+                    //Reads through all the files.
+                    foreach (string filePath in csvFiles)
                     {
-
-                        try
+                        //If the file already exists, that means that it most likely is now in the csvFiles array.
+                        //And we don't want to re-write everything thats existing into the file again, that is why this
+                        //if statement is important.
+                        if (filePath != reportFile)
                         {
-                            string[] lines = File.ReadAllLines(filePath);
-                            StringBuilder builder = new StringBuilder();
-
-                            for (int i = 0; i < lines.Length; i++)
-                            {
-                                string[] data = lines[i].Split(',');
-                                if (data[0] == "id")
-                                {
-
-                                }
-                                else
-                                {
-                                    builder.Append($"{lines[i]}\n");
-                                }
-                            }                       
-                            writer.WriteLine(builder.ToString());
                            
+                           
+                           
+                                string[] lines = File.ReadAllLines(filePath);
+                                StringBuilder builder = new StringBuilder();
+
+                                for (int i = 0; i < lines.Length; i++)
+                                {
+                                    string[] data = lines[i].Split(',');
+                                    if (data[0] == "id")
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        builder.Append($"{lines[i]}\n");
+                                    }
+                                }
+                                writer.WriteLine(builder.ToString());
+
+                                                      
+
                         }
-                        catch (IOException ex)
-                        {
-                            MessageBox.Show($"Error reading file {filePath}", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
-                       
+
                     }
-                    
+                    writer.Close();
+
+                    MessageBox.Show($"Updated report in ./Finance_Report.csv");
                 }
-                writer.Close();
-
-                MessageBox.Show($"Updated report in ./Finance_Report.csv");
             }
-          
-                
-
+            catch (IOException ex)
+            {
+                MessageBox.Show($"Error updating file", ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                if(writer!=null)
+                writer.Close();
+            }
         }
 
         private void Btn_AddExpense(object sender, RoutedEventArgs e)
