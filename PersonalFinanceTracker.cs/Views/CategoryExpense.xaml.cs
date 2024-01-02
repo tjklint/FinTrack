@@ -21,17 +21,22 @@ namespace PersonalFinanceTracker.cs.Views
     /// </summary>
     public partial class CategoryExpense : Window
     {
+        // Event declaration that will be triggered everytime the categories are updated.
+        // Using action as it's a datatype that has no parameters and does not return a value.
         public event Action CategoriesUpdated;
 
-        private Finances finances; // TODO: talk about this in doc (private)
+        // Private field 'finances' of type Finances. 
+        private Finances finances; 
 
         public CategoryExpense()
         {
             InitializeComponent();
 
+            // Initialize 'finances' and bind it to the DataContext for data binding in XAML.
             finances = new Finances();
             this.DataContext = finances;
 
+            // Load existing categories from file and set the item source for the combo box.
             Categories.LoadCategories();
             DeleteCategoryComboBox.ItemsSource = Categories.ExpenseCategories;
         }
