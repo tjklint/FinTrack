@@ -190,14 +190,17 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
+            // Open the PayExpense window.
             PayExpense payExpense = new PayExpense();
             payExpense.Show();
 
+            // Close the current window.
             this.Close();
         }
 
         private void Btn_ManageCategories(object sender, RoutedEventArgs e)
         {
+            // Open the CategoryExpense window and subscribe to the CategoriesUpdated event
             CategoryExpense categoryExpenseWindow = new CategoryExpense();
             categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
             categoryExpenseWindow.Show();
@@ -205,6 +208,7 @@ namespace PersonalFinanceTracker.cs
 
         public void UpdateCategoryComboBox()
         {
+            // Update the categories in the CategoryComboBox from the Categories class
             categories = Categories.ExpenseCategories;
             CategoryComboBox.ItemsSource = null;
             CategoryComboBox.ItemsSource = categories;
@@ -212,6 +216,7 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_AddDeleteCategory(object sender, RoutedEventArgs e)
         {
+            // Open the CategoryExpense window and subscribe to the CategoriesUpdated event
             CategoryExpense categoryExpenseWindow = new CategoryExpense();
             categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
             categoryExpenseWindow.Show();
