@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceTracker.cs.Views"
         mc:Ignorable="d"
-        Title="CategoryExpense" Height="200" Width="400">
+        Title="CategoryExpense" Height="200" Width="300">
     <Grid>
         <!-- Add Expense Category Section -->
             <GroupBox Header="Expense Category" Grid.Column="0" Grid.Row="1">
