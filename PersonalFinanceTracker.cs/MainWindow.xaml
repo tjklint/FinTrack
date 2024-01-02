@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonalFinanceTracker.cs"
         mc:Ignorable="d"
-        Title="Finance Falcon" Height="500" Width="500"
+        Title="Finance Falcon" Height="550" Width="550"
         WindowStartupLocation="CenterScreen" Background="#FFB1A296">
     <Window.Resources>
         <Style TargetType="Button">
@@ -47,17 +47,8 @@
                 <!-- For Expenses -->
             </Grid.RowDefinitions>
 
-            <!-- Income Section -->
-            <GroupBox Header="Income" Grid.Column="0" Grid.Row="0" BorderBrush="#FF5D5C61">
-                <StackPanel>
-                    <Label>Amount:</Label>
-                    <TextBox x:Name="IncomeAmountTextBox" ToolTip="Enter income amount"/>
-                    <Button Content="Add Income" Margin="0,5,0,0" Click="Btn_AddIncome"/>
-                </StackPanel>
-            </GroupBox>
-
             <!-- Expenses Section -->
-            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="1" BorderBrush="#FF5D5C61">
+            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="0" BorderBrush="#FF5D5C61">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -173,10 +164,20 @@
                         <ComboBox x:Name="CategoryComboBox"/>
                     </StackPanel>
 
-                    
+
                     <!-- Add Expense Button -->
                     <Button Content="Add Expense" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,10" HorizontalAlignment="Stretch" Click="Btn_AddExpense" />
                 </Grid>
+
+            </GroupBox>
+
+            <!-- Income Section -->
+            <GroupBox Header="Income" Grid.Column="0" Grid.Row="1" BorderBrush="#FF5D5C61">
+                <StackPanel>
+                    <Label>Amount:</Label>
+                    <TextBox x:Name="IncomeAmountTextBox" ToolTip="Enter income amount"/>
+                    <Button Content="Add Income" Margin="0,5,0,0" Click="Btn_AddIncome"/>
+                </StackPanel>
             </GroupBox>
         </Grid>
 
