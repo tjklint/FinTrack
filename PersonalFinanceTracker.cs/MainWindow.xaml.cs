@@ -210,7 +210,6 @@ namespace PersonalFinanceTracker.cs
 
         private void Btn_AddDeleteCategory_Click(object sender, RoutedEventArgs e)
         {
-            // Assuming CategoryExpense is a Window
             CategoryExpense categoryExpenseWindow = new CategoryExpense();
             categoryExpenseWindow.Show();
         }

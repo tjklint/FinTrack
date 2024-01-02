@@ -175,12 +175,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <!-- Added third column -->
             </Grid.ColumnDefinitions>
 
             <Button Content="Generate Report" Grid.Column="0" Margin="5" Click="Btn_GenerateReport"/>
             <Button Content="Add/Delete Category" Grid.Column="1" Margin="5" Click="Btn_AddDeleteCategory"/>
-            <!-- New Button -->
             <Button Content="Pay Expense" Grid.Column="2" Margin="5" Click="Btn_PayExpense"/>
         </Grid>
 
