@@ -208,7 +208,7 @@ namespace PersonalFinanceTracker.cs
             CategoryComboBox.ItemsSource = Categories.ExpenseCategories;
         }
 
-        private void Btn_AddDeleteCategory_Click(object sender, RoutedEventArgs e)
+        private void Btn_AddDeleteCategory(object sender, RoutedEventArgs e)
         {
             CategoryExpense categoryExpenseWindow = new CategoryExpense();
             categoryExpenseWindow.Show();
