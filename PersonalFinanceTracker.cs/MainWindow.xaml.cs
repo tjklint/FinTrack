@@ -1,4 +1,5 @@
-﻿using PersonalFinanceTracker.cs.Views;
+﻿using PersonalFinanceTracker.cs.Models;
+using PersonalFinanceTracker.cs.Views;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -194,10 +195,24 @@ namespace PersonalFinanceTracker.cs
             this.Close();
         }
 
+        private void OpenCategoryExpense()
+        {
+            var categoryExpenseWindow = new CategoryExpense();
+            categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
+            categoryExpenseWindow.Show();
+        }
+
         private void Btn_ManageCategories(object sender, RoutedEventArgs e)
         {
-            var categoryExpenseWindow = new CategoryExpense(); // Assuming the class name is CategoryExpenseWindow
+            var categoryExpenseWindow = new CategoryExpense();
+            categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
             categoryExpenseWindow.Show();
+        }
+
+        public void UpdateCategoryComboBox()
+        {
+            CategoryComboBox.ItemsSource = null;
+            CategoryComboBox.ItemsSource = Categories.ExpenseCategories;
         }
     }
 }

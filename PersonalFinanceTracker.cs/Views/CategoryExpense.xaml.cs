@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PersonalFinanceTracker.cs.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,8 +21,9 @@ namespace PersonalFinanceTracker.cs.Views
     /// </summary>
     public partial class CategoryExpense : Window
     {
+        public event Action CategoriesUpdated;
+
         private Finances finances; // TODO: talk about this in doc (private)
-        private List<string> categories;
 
         public CategoryExpense()
         {
@@ -30,83 +32,39 @@ namespace PersonalFinanceTracker.cs.Views
             finances = new Finances();
             this.DataContext = finances;
 
-            categories = LoadCategories();
-            DeleteCategoryComboBox.ItemsSource = categories;
+            Categories.LoadCategories();
+            DeleteCategoryComboBox.ItemsSource = Categories.ExpenseCategories;
         }
+
         private void Btn_AddCategory(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(NewCategoryTextBox.Text) && !categories.Contains(NewCategoryTextBox.Text))
+            if (!string.IsNullOrWhiteSpace(NewCategoryTextBox.Text) && !Categories.ExpenseCategories.Contains(NewCategoryTextBox.Text))
             {
-                categories.Add(NewCategoryTextBox.Text);
-                SaveCategory(NewCategoryTextBox.Text);
+                Categories.AddCategory(NewCategoryTextBox.Text);
                 NewCategoryTextBox.Clear();
 
                 DeleteCategoryComboBox.ItemsSource = null;
-                DeleteCategoryComboBox.ItemsSource = categories;
+                DeleteCategoryComboBox.ItemsSource = Categories.ExpenseCategories;
+
+                CategoriesUpdated?.Invoke();
             }
         }
-        private void SaveCategory(string category)
-        {
-            string filePath = "categories.txt";
-            File.AppendAllText(filePath, $"{category}\n");
-        }
+
         private void Btn_DeleteCategory(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && categories.Contains(DeleteCategoryComboBox.Text))
+            if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && Categories.ExpenseCategories.Contains(DeleteCategoryComboBox.Text))
             {
-
-                categories.Remove(DeleteCategoryComboBox.Text);
+                Categories.DeleteCategory(DeleteCategoryComboBox.Text);
 
                 DeleteCategoryComboBox.ItemsSource = null;
-                DeleteCategoryComboBox.ItemsSource = categories;
-                DeleteCategory();
+                DeleteCategoryComboBox.ItemsSource = Categories.ExpenseCategories;
 
+                CategoriesUpdated?.Invoke();
             }
             else
             {
                 MessageBox.Show("Please choose a category to remove.");
             }
-        }
-        private void DeleteCategory()
-        {
-            string filePath = "./categories.txt";
-
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    StringBuilder builder = new StringBuilder();
-                    for (int i = 0; i < categories.Count; i++)
-                    {
-                        builder.Append(categories[i]);
-                    }
-                    // streamWriter = new StreamWriter(filePath,true);
-                    File.WriteAllText(filePath, builder.ToString());
-                }
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Error:{ex.Message}");
-            }
-
-        }
-        private List<string> LoadCategories()
-        {
-            string filePath = "categories.txt";
-            List<string> loadedCategories = new List<string>();
-
-            if (File.Exists(filePath))
-            {
-                loadedCategories = new List<string>(File.ReadAllLines(filePath));
-            }
-            else
-            {
-                // Add default categories if the file doesn't exist
-                loadedCategories.AddRange(new[] { "Create A Category" });
-                File.WriteAllLines(filePath, loadedCategories);
-            }
-
-            return loadedCategories;
         }
     }
 }
