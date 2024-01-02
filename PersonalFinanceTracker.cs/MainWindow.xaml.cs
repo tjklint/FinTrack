@@ -44,6 +44,8 @@ namespace PersonalFinanceTracker.cs
         {
             if (decimal.TryParse(IncomeAmountTextBox.Text, out decimal incomeAmount))
             {
+                incomeAmount = Math.Round(incomeAmount, 2);
+
                 finances.AddIncome(incomeAmount);
 
                 string filePath = "income.txt";

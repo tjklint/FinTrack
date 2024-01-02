@@ -28,18 +28,18 @@
 
 
         <!-- Title Section -->
-        <TextBlock Text="Finance Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0"/>
+        <TextBlock Text="Finance Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0" Margin="0,0,0,10"/>
 
         <!-- Balance and Expenses Display -->
         <StackPanel Grid.Row="1" Margin="5" Orientation="Horizontal" HorizontalAlignment="Center">
             <TextBlock Text="TOTAL BALANCE: " FontSize="16" FontWeight="Bold"/>
             <TextBlock Text="{Binding Balance}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
-            <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
+            <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="10,0,0,0"/>
             <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
         </StackPanel>
 
         <!-- Main Content Section -->
-        <Grid Grid.Row="2" Margin="5">
+        <Grid Grid.Row="2" Margin="5,0,0,20">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <!-- For Income -->
@@ -48,7 +48,7 @@
             </Grid.RowDefinitions>
 
             <!-- Expenses Section -->
-            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="0" BorderBrush="#FF5D5C61">
+            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="0" BorderBrush="#FF5D5C61" Margin="5,0,0,15">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -189,10 +189,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
-            <Button Content="Generate Report" Grid.Column="0" Margin="5" Click="Btn_GenerateReport"/>
+            
+            <Button Content="Pay Expense" Grid.Column="0" Margin="5" Click="Btn_PayExpense"/>
             <Button Content="Add/Delete Category" Grid.Column="1" Margin="5" Click="Btn_AddDeleteCategory"/>
-            <Button Content="Pay Expense" Grid.Column="2" Margin="5" Click="Btn_PayExpense"/>
+            <Button Content="Generate Report" Grid.Column="2" Margin="5" Click="Btn_GenerateReport"/>
         </Grid>
 
         <!-- Footer Section -->
