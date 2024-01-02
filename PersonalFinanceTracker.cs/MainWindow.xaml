@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PersonalFinanceTracker.cs"
         mc:Ignorable="d"
         Title="Finance Falcon" Height="500" Width="500"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Background="#FFB1A296">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#5D5C61" />
