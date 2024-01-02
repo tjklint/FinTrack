@@ -38,6 +38,7 @@ namespace PersonalFinanceTracker.cs.Views
             //Checks to make sure that an expense was selected and an amount was inputted.
             if (GridExpenses.SelectedItem is not null && decimal.TryParse(ExpenseAmountTextBox.Text, out decimal expenseAmount))
             {
+                expenseAmount = Math.Round(expenseAmount, 2);
                 //Gets the selected record.
                 FinancialRecords record = GridExpenses.SelectedItem as FinancialRecords;
                 //Pays off the expense.
