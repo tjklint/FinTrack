@@ -195,16 +195,9 @@ namespace PersonalFinanceTracker.cs
             this.Close();
         }
 
-        private void OpenCategoryExpense()
-        {
-            var categoryExpenseWindow = new CategoryExpense();
-            categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
-            categoryExpenseWindow.Show();
-        }
-
         private void Btn_ManageCategories(object sender, RoutedEventArgs e)
         {
-            var categoryExpenseWindow = new CategoryExpense();
+            CategoryExpense categoryExpenseWindow = new CategoryExpense();
             categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
             categoryExpenseWindow.Show();
         }
@@ -214,5 +207,13 @@ namespace PersonalFinanceTracker.cs
             CategoryComboBox.ItemsSource = null;
             CategoryComboBox.ItemsSource = Categories.ExpenseCategories;
         }
+
+        private void Btn_AddDeleteCategory_Click(object sender, RoutedEventArgs e)
+        {
+            // Assuming CategoryExpense is a Window
+            CategoryExpense categoryExpenseWindow = new CategoryExpense();
+            categoryExpenseWindow.Show();
+        }
+
     }
 }

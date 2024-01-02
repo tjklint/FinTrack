@@ -11,7 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -27,18 +27,12 @@
             <TextBlock Text="TOTAL EXPENSES: " FontSize="16" FontWeight="Bold" Margin="20,0,0,0"/>
             <TextBlock Text="{Binding Expenses}" FontSize="16" FontWeight="Bold" Margin="5,0"/>
         </StackPanel>
-        
+
         <!-- Main Content Section -->
         <Grid Grid.Row="2" Margin="10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
                 <!-- For Income -->
-                <RowDefinition Height="Auto"/>
-                <!-- For Add Expense Category -->
                 <RowDefinition Height="*"/>
                 <!-- For Expenses -->
             </Grid.RowDefinitions>
@@ -52,27 +46,105 @@
                 </StackPanel>
             </GroupBox>
 
-            
             <!-- Expenses Section -->
-            <GroupBox Header="Expenses" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
-                <StackPanel>
-                    <Label>Amount:</Label>
-                    <TextBox x:Name="ExpenseAmountTextBox" ToolTip="Enter expense amount"/>
-                    <Label>Category:</Label>
-                    <ComboBox x:Name="CategoryComboBox"/>
+            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                    <!-- Date Selection Section -->
-                    <StackPanel Margin="0,10,0,0">
-                        <!-- Year Dropdown -->
+                    <!-- Amount -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                        <Label>Amount:</Label>
+                        <TextBox x:Name="ExpenseAmountTextBox" ToolTip="Enter expense amount"/>
+                    </StackPanel>
+
+                    <!-- Category -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+                        <Label>Category:</Label>
+                        <ComboBox x:Name="CategoryComboBox"/>
+                    </StackPanel>
+
+                    <!-- Year -->
+                    <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
                         <Label>Year:</Label>
                         <ComboBox x:Name="YearComboBox" SelectedIndex="0" ToolTip="Select year">
-                            <!-- Pre-populate with years, or bind dynamically -->
                             <ComboBoxItem Content="2024"/>
                             <ComboBoxItem Content="2023"/>
-                            <!-- Add more years as needed -->
-                        </ComboBox>
+                            <ComboBoxItem Content="2022"/>
+                            <ComboBoxItem Content="2021"/>
+                            <ComboBoxItem Content="2020"/>
+                            <ComboBoxItem Content="2019"/>
+                            <ComboBoxItem Content="2018"/>
+                            <ComboBoxItem Content="2017"/>
+                            <ComboBoxItem Content="2016"/>
+                            <ComboBoxItem Content="2015"/>
+                            <ComboBoxItem Content="2014"/>
+                            <ComboBoxItem Content="2013"/>
+                            <ComboBoxItem Content="2012"/>
+                            <ComboBoxItem Content="2011"/>
+                            <ComboBoxItem Content="2010"/>
+                            <ComboBoxItem Content="2009"/>
+                            <ComboBoxItem Content="2008"/>
+                            <ComboBoxItem Content="2007"/>
+                            <ComboBoxItem Content="2006"/>
+                            <ComboBoxItem Content="2005"/>
+                            <ComboBoxItem Content="2004"/>
+                            <ComboBoxItem Content="2003"/>
+                            <ComboBoxItem Content="2002"/>
+                            <ComboBoxItem Content="2001"/>
+                            <ComboBoxItem Content="2000"/>
+                            <ComboBoxItem Content="1999"/>
+                            <ComboBoxItem Content="1998"/>
+                            <ComboBoxItem Content="1997"/>
+                            <ComboBoxItem Content="1996"/>
+                            <ComboBoxItem Content="1995"/>
+                            <ComboBoxItem Content="1994"/>
+                            <ComboBoxItem Content="1993"/>
+                            <ComboBoxItem Content="1992"/>
+                            <ComboBoxItem Content="1991"/>
+                            <ComboBoxItem Content="1990"/>
+                            <ComboBoxItem Content="1989"/>
+                            <ComboBoxItem Content="1988"/>
+                            <ComboBoxItem Content="1987"/>
+                            <ComboBoxItem Content="1986"/>
+                            <ComboBoxItem Content="1985"/>
+                            <ComboBoxItem Content="1984"/>
+                            <ComboBoxItem Content="1983"/>
+                            <ComboBoxItem Content="1982"/>
+                            <ComboBoxItem Content="1981"/>
+                            <ComboBoxItem Content="1980"/>
+                            <ComboBoxItem Content="1979"/>
+                            <ComboBoxItem Content="1978"/>
+                            <ComboBoxItem Content="1977"/>
+                            <ComboBoxItem Content="1976"/>
+                            <ComboBoxItem Content="1975"/>
+                            <ComboBoxItem Content="1974"/>
+                            <ComboBoxItem Content="1973"/>
+                            <ComboBoxItem Content="1972"/>
+                            <ComboBoxItem Content="1971"/>
+                            <ComboBoxItem Content="1970"/>
+                            <ComboBoxItem Content="1969"/>
+                            <ComboBoxItem Content="1968"/>
+                            <ComboBoxItem Content="1967"/>
+                            <ComboBoxItem Content="1966"/>
+                            <ComboBoxItem Content="1965"/>
+                            <ComboBoxItem Content="1964"/>
+                            <ComboBoxItem Content="1963"/>
+                            <ComboBoxItem Content="1962"/>
+                            <ComboBoxItem Content="1961"/>
+                            <ComboBoxItem Content="1960"/>
+                         </ComboBox>
+                    </StackPanel>
 
-                        <!-- Month Dropdown -->
+                    <!-- Month -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Margin="10,0,0,10">
                         <Label>Month:</Label>
                         <ComboBox x:Name="MonthComboBox" SelectedIndex="0" ToolTip="Select month">
                             <ComboBoxItem Content="January"/>
@@ -87,13 +159,15 @@
                             <ComboBoxItem Content="October"/>
                             <ComboBoxItem Content="November"/>
                             <ComboBoxItem Content="December"/>
-                            <!-- Add all months -->
                         </ComboBox>
                     </StackPanel>
-                    <Button Content="Add Expense" Margin="0,5,0,0" Click="Btn_AddExpense"/>
-                </StackPanel>
+
+                    <!-- Add Expense Button -->
+                    <Button Content="Add Expense" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,10" HorizontalAlignment="Stretch" Click="Btn_AddExpense" />
+                </Grid>
             </GroupBox>
         </Grid>
+
 
         <!-- File Operations -->
         <Grid Grid.Row="3">
@@ -101,12 +175,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <!-- Added third column -->
             </Grid.ColumnDefinitions>
 
             <Button Content="Generate Report" Grid.Column="0" Margin="5" Click="Btn_GenerateReport"/>
-            <Button Content="Pay Expense" Grid.Column="1" Margin="5" Click="Btn_PayExpense"/>
-            <Button Content="Manage Categories" Grid.Column="2" Margin="5" Click="Btn_ManageCategories"/>
-
+            <Button Content="Add/Delete Category" Grid.Column="1" Margin="5" Click="Btn_AddDeleteCategory"/>
+            <!-- New Button -->
+            <Button Content="Pay Expense" Grid.Column="2" Margin="5" Click="Btn_PayExpense"/>
         </Grid>
 
         <!-- Footer Section -->
