@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PersonalFinanceTracker.cs.Models
 {
-    internal class Categories
+    static class Categories
     {
         public static List<string> ExpenseCategories = new List<string>();
 
