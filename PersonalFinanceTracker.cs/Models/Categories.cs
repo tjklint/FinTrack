@@ -11,6 +11,12 @@ namespace PersonalFinanceTracker.cs.Models
     {
         public static List<string> ExpenseCategories = new List<string>();
 
+        static Categories()
+        {
+            ExpenseCategories = new List<string>();
+            LoadCategories();
+        }
+
         public static void LoadCategories()
         {
             string filePath = "categories.txt";

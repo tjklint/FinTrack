@@ -7,7 +7,17 @@
         mc:Ignorable="d"
         Title="Finance Falcon" Height="500" Width="500"
         WindowStartupLocation="CenterScreen">
-    <Grid Grid.Row="2" Margin="10">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#5D5C61" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="#5D5C61"/>
+            <Setter Property="Padding" Value="9" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#B1A296" Grid.Row="2" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -18,7 +28,7 @@
 
 
         <!-- Title Section -->
-        <TextBlock Text="Finance Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="10" Grid.Row="0"/>
+        <TextBlock Text="Finance Tracker" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Grid.Row="0"/>
 
         <!-- Balance and Expenses Display -->
         <StackPanel Grid.Row="1" Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -38,7 +48,7 @@
             </Grid.RowDefinitions>
 
             <!-- Income Section -->
-            <GroupBox Header="Income" Grid.Column="0" Grid.Row="0">
+            <GroupBox Header="Income" Grid.Column="0" Grid.Row="0" BorderBrush="#FF5D5C61">
                 <StackPanel>
                     <Label>Amount:</Label>
                     <TextBox x:Name="IncomeAmountTextBox" ToolTip="Enter income amount"/>
@@ -47,7 +57,7 @@
             </GroupBox>
 
             <!-- Expenses Section -->
-            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="1">
+            <GroupBox Header="Expenses" Grid.Column="0" Grid.Row="1" BorderBrush="#FF5D5C61">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -58,18 +68,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-
-                    <!-- Amount -->
-                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
-                        <Label>Amount:</Label>
-                        <TextBox x:Name="ExpenseAmountTextBox" ToolTip="Enter expense amount"/>
-                    </StackPanel>
-
-                    <!-- Category -->
-                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
-                        <Label>Category:</Label>
-                        <ComboBox x:Name="CategoryComboBox"/>
-                    </StackPanel>
 
                     <!-- Year -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
@@ -140,7 +138,7 @@
                             <ComboBoxItem Content="1962"/>
                             <ComboBoxItem Content="1961"/>
                             <ComboBoxItem Content="1960"/>
-                         </ComboBox>
+                        </ComboBox>
                     </StackPanel>
 
                     <!-- Month -->
@@ -162,6 +160,20 @@
                         </ComboBox>
                     </StackPanel>
 
+
+                    <!-- Amount -->
+                    <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,10,0">
+                        <Label>Amount:</Label>
+                        <TextBox x:Name="ExpenseAmountTextBox" ToolTip="Enter expense amount"/>
+                    </StackPanel>
+
+                    <!-- Category -->
+                    <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0">
+                        <Label>Category:</Label>
+                        <ComboBox x:Name="CategoryComboBox"/>
+                    </StackPanel>
+
+                    
                     <!-- Add Expense Button -->
                     <Button Content="Add Expense" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,5,0,10" HorizontalAlignment="Stretch" Click="Btn_AddExpense" />
                 </Grid>

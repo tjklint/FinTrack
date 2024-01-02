@@ -34,28 +34,11 @@ namespace PersonalFinanceTracker.cs
             finances = new Finances();
             this.DataContext = finances;
 
-            categories = LoadCategories();
+            categories = Categories.ExpenseCategories;
             CategoryComboBox.ItemsSource = categories;
         }
 
-        private List<string> LoadCategories()
-        {
-            string filePath = "categories.txt";
-            List<string> loadedCategories = new List<string>();
 
-            if (File.Exists(filePath))
-            {
-                loadedCategories = new List<string>(File.ReadAllLines(filePath));
-            }
-            else
-            {
-                // Add default categories if the file doesn't exist
-                loadedCategories.AddRange(new[] { "Create A Category"});
-                File.WriteAllLines(filePath, loadedCategories);
-            }
-
-            return loadedCategories;
-        }
 
         private void Btn_AddIncome(object sender, RoutedEventArgs e)
         {
@@ -204,13 +187,15 @@ namespace PersonalFinanceTracker.cs
 
         public void UpdateCategoryComboBox()
         {
+            categories = Categories.ExpenseCategories;
             CategoryComboBox.ItemsSource = null;
-            CategoryComboBox.ItemsSource = Categories.ExpenseCategories;
+            CategoryComboBox.ItemsSource = categories;
         }
 
         private void Btn_AddDeleteCategory(object sender, RoutedEventArgs e)
         {
             CategoryExpense categoryExpenseWindow = new CategoryExpense();
+            categoryExpenseWindow.CategoriesUpdated += UpdateCategoryComboBox;
             categoryExpenseWindow.Show();
         }
 
