@@ -61,7 +61,7 @@ namespace PersonalFinanceTracker.cs
                     }
                     else
                     {
-                        // TODO: Add error in case there's an issue with IO???
+                        MessageBox.Show($"Error adding income to file. File might not exist", filePath, MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
