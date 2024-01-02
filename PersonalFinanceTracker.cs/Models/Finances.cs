@@ -34,14 +34,18 @@ public class Finances : INotifyPropertyChanged
     #region Constructor
     public Finances()
     {
+        // Initialize the balance from a file.
         InitializeBalance();
 
+        // Initialize financial records from various CSV files.
         InitializeFinancialRecords();
     }
 
+    // Method to initialize the balance by reading from or creating a file
     private void InitializeBalance()
     {
         string incomeFilePath = "income.txt";
+        // Check if the file exists.
         if (File.Exists(incomeFilePath))
         {
             // Read the existing balance from the file
@@ -57,13 +61,17 @@ public class Finances : INotifyPropertyChanged
         }
     }
 
+    // Method to initialize financial records by reading from CSV files
     private void InitializeFinancialRecords()
     {
+        // Initialize expenses to 0.
         _expenses = 0m;
 
+        // Get all CSV files containing expense records
         string[] csvFiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "*_expenses.csv");
         foreach (string file in csvFiles)
         {
+            // Read each file and process its contents
             string[] lines = File.ReadAllLines(file);
             bool isFirstLine = true; // Flag to skip the header line
 
@@ -75,9 +83,11 @@ public class Finances : INotifyPropertyChanged
                     continue; // Skip the header line
                 }
 
+                // Split each line into parts and process them
                 string[] parts = line.Split(',');
                 if (parts.Length == 6)
                 {
+                    // Parse the necessary fields and create a FinancialRecords object
                     decimal.TryParse(parts[2], out decimal expense);
                     decimal.TryParse(parts[5], out decimal amountPayed);
                     int.TryParse(parts[4], out int year);
@@ -88,6 +98,7 @@ public class Finances : INotifyPropertyChanged
                         AmountPayed = amountPayed
                     };
 
+                    // Add the record to the list and update the total expenses
                     _records.Add(record);
                     _expenses += expense;
                 }
@@ -101,7 +112,7 @@ public class Finances : INotifyPropertyChanged
         //By using the sort method for a list and CompareTo, I can compare the two ids of two FinancialRecords
         //and it'll sort them accordingly after the comparison is made.
         _records.Sort((record1, record2) => record1.ID.CompareTo(record2.ID));
-       
+
     }
     #endregion
 
@@ -125,12 +136,10 @@ public class Finances : INotifyPropertyChanged
         return _records;
     }
     public void SetFinancialRecord(FinancialRecords record)
-    {      
-            Expenses += record.Expense;
-            record.ID = _records.Count;
-            _records.Add(record);
- 
-        
+    {
+        Expenses += record.Expense;
+        record.ID = _records.Count;
+        _records.Add(record);
     }
     public decimal Expenses
     {
@@ -139,13 +148,13 @@ public class Finances : INotifyPropertyChanged
             return _expenses;
         }
         private set
-        {       
-            if(value<0)
+        {
+            if (value < 0)
             {
                 MessageBox.Show("Expense value cannot be less than 0", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             _expenses = value;
-            OnPropertyChanged(nameof(Expenses)); 
+            OnPropertyChanged(nameof(Expenses));
         }
     }
 
@@ -179,7 +188,7 @@ public class Finances : INotifyPropertyChanged
 
     public decimal PayExpense(int id, decimal amount)
     {
-        
+
         if (_records[id].Expense - amount < 0)
         {
             MessageBox.Show("Amount cannot exceed expense.", "Argument Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -197,7 +206,7 @@ public class Finances : INotifyPropertyChanged
             _records[id].Expense -= amount;
             SubtractIncome(amount);
         }
-        
+
         return Balance;
     }
 
@@ -219,13 +228,13 @@ public class Finances : INotifyPropertyChanged
             string balanceStr = File.ReadAllText(incomeFilePath);
             decimal.TryParse(balanceStr, out _balance);
             _balance = Math.Round(_balance, 2);
-            _balance -= Math.Round(amount,2);
+            _balance -= Math.Round(amount, 2);
             File.WriteAllText(incomeFilePath, _balance.ToString());
         }
-        
+
     }
     public void DeleteRecord(FinancialRecords record)
-    {      
+    {
         Expenses -= record.Expense;
         _records.Remove(record);
 
