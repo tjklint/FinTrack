@@ -35,7 +35,6 @@ namespace PersonalFinanceTracker.cs
 
             categories = LoadCategories();
             CategoryComboBox.ItemsSource = categories;
-            DeleteCategoryComboBox.ItemsSource = categories;
         }
 
         private List<string> LoadCategories()
@@ -185,71 +184,7 @@ namespace PersonalFinanceTracker.cs
             }
         }
 
-        private void Btn_AddCategory(object sender, RoutedEventArgs e)
-        {
-            if(!string.IsNullOrWhiteSpace(NewCategoryTextBox.Text) && !categories.Contains(NewCategoryTextBox.Text))
-        {
-                categories.Add(NewCategoryTextBox.Text);
-                SaveCategory(NewCategoryTextBox.Text);
-                NewCategoryTextBox.Clear();
-
-                // Update the ComboBox's ItemsSource
-                CategoryComboBox.ItemsSource = null;
-                CategoryComboBox.ItemsSource = categories;
-
-                DeleteCategoryComboBox.ItemsSource = null;
-                DeleteCategoryComboBox.ItemsSource = categories;
-            }
-        }
-        private void SaveCategory(string category)
-        {
-            string filePath = "categories.txt";
-            File.AppendAllText(filePath, $"{category}\n");
-        }
-        private void Btn_DeleteCategory(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrWhiteSpace(DeleteCategoryComboBox.Text) && categories.Contains(DeleteCategoryComboBox.Text))
-            {
-                
-                categories.Remove(DeleteCategoryComboBox.Text);               
-
-                // Update the ComboBox's ItemsSource
-                CategoryComboBox.ItemsSource = null;
-                CategoryComboBox.ItemsSource = categories;
-
-                DeleteCategoryComboBox.ItemsSource = null;
-                DeleteCategoryComboBox.ItemsSource = categories;
-                DeleteCategory();
-
-            }
-            else
-            {
-                MessageBox.Show("Please choose a category to remove.");
-            }
-        }
-        private void DeleteCategory()
-        {
-            string filePath = "./categories.txt";
-      
-            try
-            {
-                if (File.Exists(filePath))
-                {
-                    StringBuilder builder = new StringBuilder();
-                    for (int i = 0; i < categories.Count; i++)
-                    {
-                        builder.Append(categories[i]);
-                    }
-                   // streamWriter = new StreamWriter(filePath,true);
-                    File.WriteAllText(filePath, builder.ToString());
-                }
-            }
-            catch (IOException ex)
-            {
-                Console.WriteLine($"Error:{ex.Message}");
-            }
-
-        }
+        
 
         private void Btn_PayExpense(object sender, RoutedEventArgs e)
         {
@@ -257,6 +192,12 @@ namespace PersonalFinanceTracker.cs
             payExpense.Show();
 
             this.Close();
+        }
+
+        private void Btn_ManageCategories(object sender, RoutedEventArgs e)
+        {
+            var categoryExpenseWindow = new CategoryExpense(); // Assuming the class name is CategoryExpenseWindow
+            categoryExpenseWindow.Show();
         }
     }
 }

@@ -52,20 +52,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <!-- Add Expense Category Section -->
-            <GroupBox Header="Expense Category" Grid.Column="0" Grid.Row="1">
-                <StackPanel>
-                    <Label>New Expense Category:</Label>
-                    <TextBox x:Name="NewCategoryTextBox" ToolTip="Enter new category name"/>
-                    <Button Content="Add Category" Margin="0,5,0,0" Click="Btn_AddCategory"/>
-
-                    <Label>Delete Expense Category:</Label>
-                    <ComboBox x:Name="DeleteCategoryComboBox" ToolTip="Delete a category name"/>
-                    <Button Content="Delete Category" Margin="0,5,0,0" Click="Btn_DeleteCategory"/>
-                </StackPanel>
-
-            </GroupBox>
-
+            
             <!-- Expenses Section -->
             <GroupBox Header="Expenses" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3">
                 <StackPanel>
@@ -113,10 +100,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Button Content="Generate Report" Grid.Column="0" Margin="5" Click="Btn_GenerateReport"/>
             <Button Content="Pay Expense" Grid.Column="1" Margin="5" Click="Btn_PayExpense"/>
+            <Button Content="Manage Categories" Grid.Column="2" Margin="5" Click="Btn_ManageCategories"/>
+
         </Grid>
 
         <!-- Footer Section -->
