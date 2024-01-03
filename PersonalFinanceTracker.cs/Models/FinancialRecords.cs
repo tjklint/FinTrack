@@ -7,7 +7,13 @@ using System.Windows.Documents;
 
 public class FinancialRecords
 {
-	private int _id;
+    /*
+      Name: Joshua Kravitz and Timothy Klint
+      ID:2271524-2273597
+      Final Project
+      */
+
+    private int _id;
 	private decimal _expense;
 	private string _categoryName;
 	private string _month;

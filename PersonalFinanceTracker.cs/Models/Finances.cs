@@ -11,6 +11,12 @@ using System.Windows.Shapes;
 // of a property has changed.
 public class Finances : INotifyPropertyChanged
 {
+    /*
+      Name: Joshua Kravitz and Timothy Klint
+      ID:2271524-2273597
+      Final Project
+      */
+
     private decimal _balance;
     private decimal _expenses;
     private decimal _income;

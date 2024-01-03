@@ -8,6 +8,11 @@ using System.Windows;
 
 namespace PersonalFinanceTracker.cs
 {
+    /*
+      Name: Joshua Kravitz and Timothy Klint
+      ID:2271524-2273597
+      Final Project
+      */
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
