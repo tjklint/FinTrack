@@ -48,6 +48,7 @@ namespace PersonalFinanceTracker.cs
             // Try to parse the text from the Text Box to a decimal.
             if (decimal.TryParse(IncomeAmountTextBox.Text, out decimal incomeAmount))
             {
+                IncomeAmountTextBox.Clear();
                 // Round the number before adding to a file.
                 incomeAmount = Math.Round(incomeAmount, 2);
 
@@ -151,6 +152,8 @@ namespace PersonalFinanceTracker.cs
                 string category = selectedCategoryItem.Text;
                 string month = selectedMonthItem.Content.ToString();
                 int year = int.Parse(selectedYearItem.Content.ToString());
+
+                ExpenseAmountTextBox.Clear();
 
                 // Assure the expense amound is rounded.
                 expenseAmount = Math.Round(expenseAmount, 2);
