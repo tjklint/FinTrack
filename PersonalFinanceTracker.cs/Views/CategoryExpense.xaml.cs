@@ -56,7 +56,7 @@ namespace PersonalFinanceTracker.cs.Views
                 DeleteCategoryComboBox.ItemsSource = Categories.ExpenseCategories;
 
                 // Invoke the CategoriesUpdated event if there are any subscribers, in this context,
-                // a subscriber is a method tha tlistens for the CategoriesUpdated event, when it's triggered,
+                // a subscriber is a method that listens for the CategoriesUpdated event, when it's triggered,
                 // the subscirber will execute its defined actions, in this case refreshing the UI.
                 CategoriesUpdated?.Invoke();
             }
