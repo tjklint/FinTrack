@@ -14,7 +14,7 @@
 
 ![Finance Tracker Main Interface](./.github/initial_screen.png)
 
->*The main interface, log expenses and income!.*
+> *The main interface, log expenses and income!.*
 
 ![Expense Details](./.github/pay_expense.png)
 
